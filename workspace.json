@@ -1,0 +1,99 @@
+{
+  "version": 2,
+  "projects": {
+    "web-admin": {
+      "root": "apps/web-admin",
+      "sourceRoot": "apps/web-admin",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/next:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "root": "apps/web-admin",
+            "outputPath": "dist/apps/web-admin"
+          },
+          "configurations": {
+            "production": {}
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/next:server",
+          "options": {
+            "buildTarget": "web-admin:build",
+            "dev": true
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "web-admin:build:production",
+              "dev": false
+            }
+          }
+        },
+        "export": {
+          "executor": "@nrwl/next:export",
+          "options": {
+            "buildTarget": "web-admin:build:production"
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/web-admin"],
+          "options": {
+            "jestConfig": "apps/web-admin/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/web-admin/**/*.{ts,tsx,js,jsx}"]
+          }
+        }
+      }
+    },
+    "web-admin-e2e": {
+      "root": "apps/web-admin-e2e",
+      "sourceRoot": "apps/web-admin-e2e/src",
+      "projectType": "application",
+      "targets": {
+        "e2e": {
+          "executor": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/web-admin-e2e/cypress.json",
+            "tsConfig": "apps/web-admin-e2e/tsconfig.e2e.json",
+            "devServerTarget": "web-admin:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "web-admin:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/web-admin-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/next"
+  },
+  "generators": {
+    "@nrwl/react": {
+      "application": {
+        "babel": true
+      }
+    },
+    "@nrwl/next": {
+      "application": {
+        "style": "scss",
+        "linter": "eslint"
+      }
+    }
+  },
+  "defaultProject": "web-admin"
+}
