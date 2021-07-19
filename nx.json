@@ -37,7 +37,7 @@
     "web-admin": {
       "tags": []
     },
-    "web-admin-e2e": {
+    "test-web-admin-e2e": {
       "tags": [],
       "implicitDependencies": ["web-admin"]
     }
