@@ -7,6 +7,7 @@ export interface ButtonProps {
   type?: BtnProps['type']
   shape?: BtnProps['shape'] | 'rectangle'
   color?: string
+  onClick?: BtnProps['onClick']
 }
 
 export function Button(props: ButtonProps) {
