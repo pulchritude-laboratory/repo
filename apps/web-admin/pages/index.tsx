@@ -1,5 +1,5 @@
-import styles from './index.module.scss';
-
+import styles from './index.module.scss'
+import { Button } from '@repo/ui-antd'
 export function Index() {
   /*
    * Replace the elements below with your own.
@@ -9,13 +9,10 @@ export function Index() {
   return (
     <div className={styles.page}>
       <h2>Resources &amp; Tools</h2>
+      <Button label="test" />
       <p>Thank you for using and showing some ♥ for Nx.</p>
       <div className="flex github-star-container">
-        <a
-          href="https://github.com/nrwl/nx"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <a href="https://github.com/nrwl/nx" target="_blank" rel="noopener noreferrer">
           {' '}
           If you like Nx, please give it a star:
           <div className="github-star-badge">
@@ -91,7 +88,7 @@ nx affected:e2e
 `}</pre>
       </details>
     </div>
-  );
+  )
 }
 
-export default Index;
+export default Index
