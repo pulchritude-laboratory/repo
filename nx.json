@@ -27,6 +27,9 @@
     ]
   },
   "projects": {
+    "ui-antd": {
+      "tags": []
+    },
     "web-admin": {
       "tags": []
     },

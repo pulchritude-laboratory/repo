@@ -1,6 +1,27 @@
 {
   "version": 2,
   "projects": {
+    "ui-antd": {
+      "root": "libs/ui-antd",
+      "sourceRoot": "libs/ui-antd/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/ui-antd/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/ui-antd"],
+          "options": {
+            "jestConfig": "libs/ui-antd/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
     "web-admin": {
       "root": "apps/web-admin",
       "sourceRoot": "apps/web-admin",
