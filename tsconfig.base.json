@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@repo/hooks": ["libs/hooks/src/index.ts"],
       "@repo/ui-antd": ["libs/ui-antd/src/index.ts"]
     }
   },

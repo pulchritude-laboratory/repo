@@ -27,19 +27,22 @@
     ]
   },
   "projects": {
+    "hooks": {
+      "tags": []
+    },
     "test-ui-antd-e2e": {
       "tags": [],
       "implicitDependencies": ["ui-antd"]
+    },
+    "test-web-admin-e2e": {
+      "tags": [],
+      "implicitDependencies": ["web-admin"]
     },
     "ui-antd": {
       "tags": []
     },
     "web-admin": {
       "tags": []
-    },
-    "test-web-admin-e2e": {
-      "tags": [],
-      "implicitDependencies": ["web-admin"]
     }
   }
 }

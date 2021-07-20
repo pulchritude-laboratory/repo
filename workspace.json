@@ -1,6 +1,27 @@
 {
   "version": 2,
   "projects": {
+    "hooks": {
+      "root": "libs/hooks",
+      "sourceRoot": "libs/hooks/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/hooks/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/hooks"],
+          "options": {
+            "jestConfig": "libs/hooks/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
     "test-ui-antd-e2e": {
       "root": "apps/test/ui-antd-e2e",
       "sourceRoot": "apps/test/ui-antd-e2e/src",
@@ -23,6 +44,32 @@
           "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["apps/test/ui-antd-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    },
+    "test-web-admin-e2e": {
+      "root": "apps/test/web-admin-e2e",
+      "sourceRoot": "apps/test/web-admin-e2e/src",
+      "projectType": "application",
+      "targets": {
+        "e2e": {
+          "executor": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/test/web-admin-e2e/cypress.json",
+            "tsConfig": "apps/test/web-admin-e2e/tsconfig.e2e.json",
+            "devServerTarget": "web-admin:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "web-admin:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/test/web-admin-e2e/**/*.{js,ts}"]
           }
         }
       }
@@ -126,32 +173,6 @@
           "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["apps/web-admin/**/*.{ts,tsx,js,jsx}"]
-          }
-        }
-      }
-    },
-    "test-web-admin-e2e": {
-      "root": "apps/test/web-admin-e2e",
-      "sourceRoot": "apps/test/web-admin-e2e/src",
-      "projectType": "application",
-      "targets": {
-        "e2e": {
-          "executor": "@nrwl/cypress:cypress",
-          "options": {
-            "cypressConfig": "apps/test/web-admin-e2e/cypress.json",
-            "tsConfig": "apps/test/web-admin-e2e/tsconfig.e2e.json",
-            "devServerTarget": "web-admin:serve"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "web-admin:serve:production"
-            }
-          }
-        },
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["apps/test/web-admin-e2e/**/*.{js,ts}"]
           }
         }
       }
