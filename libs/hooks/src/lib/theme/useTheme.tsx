@@ -1,12 +1,15 @@
 import { useCallback } from 'react'
+import { Theme } from './theme'
 
 interface UseThemeUtils {
-  setTheme: () => void
+  setTheme: (theme: Theme) => void
 }
 export const useTheme = (): UseThemeUtils => {
-  const setTheme = useCallback(() => {
+  const setTheme = useCallback((theme: Theme) => {
     const root = document.documentElement
-    root.style.setProperty('--color-primary-base', '#000000')
+    theme?.colors?.forEach(cssVar => {
+      root.style.setProperty(...cssVar)
+    })
   }, [])
 
   return { setTheme }

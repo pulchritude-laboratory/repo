@@ -1,26 +1,26 @@
 import { renderHook } from '@testing-library/react-hooks'
 import { useTheme } from './useTheme'
 
-const initHook = () => {
-  const { result } = renderHook(() => useTheme())
-  return result.current
-}
+const initHook = () => renderHook(() => useTheme()).result.current
 
-describe('Button', () => {
+describe('theme setter', () => {
   const { setTheme } = initHook()
 
   const root = document.documentElement
-  const valueBefore = root.style.getPropertyValue('--color-primary-base')
+
+  const valueBefore = root.style.getPropertyValue('--color-primary-muted')
 
   it('before', () => {
     expect(valueBefore).toBe('')
   })
 
-  setTheme()
+  setTheme({
+    colors: [['--color-primary-muted', '#da1']]
+  })
 
-  const valueAfter = root.style.getPropertyValue('--color-primary-base')
+  const valueAfter = root.style.getPropertyValue('--color-primary-muted')
 
   it('after', () => {
-    expect(valueAfter.length).toBe(7)
+    expect(valueAfter).toBe('#da1')
   })
 })

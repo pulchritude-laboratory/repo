@@ -16,9 +16,21 @@ export function Index() {
       <h2>Resources &amp; Tools</h2>
       <Button type="primary" title="test" onClick={() => setCounter(v => v + 1)} />
       <div id="counter">{counter}</div>
-      <Button type="primary" title="theme" onClick={() => setTheme()} />
+      <Button
+        type="primary"
+        title="theme"
+        onClick={() => setTheme({ colors: [['--color-primary-base', '#00ff00']] })}
+      />
+      <Button
+        type="primary"
+        title="theme 2"
+        onClick={() => setTheme({ colors: [['--color-primary-base', '#0000ff']] })}
+      />
       <p>Thank you for using and showing some ♥ for Nx.</p>
-      <div className="flex github-star-container">
+      <div
+        className="flex github-star-container"
+        style={{ background: 'var(--color-primary-base)' }}
+      >
         <a href="https://github.com/nrwl/nx" target="_blank" rel="noopener noreferrer">
           {' '}
           If you like Nx, please give it a star:
