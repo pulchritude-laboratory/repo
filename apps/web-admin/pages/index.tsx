@@ -1,5 +1,6 @@
 import styles from './index.module.scss'
 import { Button } from '@repo/ui-antd'
+import { useTheme } from '@repo/hooks'
 import { useState } from 'react'
 export function Index() {
   /*
@@ -7,6 +8,7 @@ export function Index() {
    *
    * Note: The corresponding styles are in the ./index.scss file.
    */
+  const { setTheme } = useTheme()
 
   const [counter, setCounter] = useState(0)
   return (
@@ -14,6 +16,7 @@ export function Index() {
       <h2>Resources &amp; Tools</h2>
       <Button type="primary" title="test" onClick={() => setCounter(v => v + 1)} />
       <div id="counter">{counter}</div>
+      <Button type="primary" title="theme" onClick={() => setTheme()} />
       <p>Thank you for using and showing some ♥ for Nx.</p>
       <div className="flex github-star-container">
         <a href="https://github.com/nrwl/nx" target="_blank" rel="noopener noreferrer">
