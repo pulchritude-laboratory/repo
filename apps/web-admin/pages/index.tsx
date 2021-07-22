@@ -1,5 +1,5 @@
 import styles from './index.module.scss'
-import { Button } from '@repo/ui-antd'
+import { Button, ThemeSwitcher } from '@repo/ui-antd'
 import { useTheme } from '@repo/hooks'
 import { useState } from 'react'
 export function Index() {
@@ -9,11 +9,12 @@ export function Index() {
    * Note: The corresponding styles are in the ./index.scss file.
    */
   const { setTheme } = useTheme()
+  console.log('ddd', styles)
 
   const [counter, setCounter] = useState(0)
   return (
     <div className={styles.page}>
-      <h2>Resources &amp; Tools</h2>
+      <h2 className="sss">Resources &amp; Tools</h2>
       <Button type="primary" title="test" onClick={() => setCounter(v => v + 1)} />
       <div id="counter">{counter}</div>
       <Button
@@ -26,6 +27,7 @@ export function Index() {
         title="theme 2"
         onClick={() => setTheme({ colors: [['--color-primary-base', '#0000ff']] })}
       />
+      <ThemeSwitcher />
       <p>Thank you for using and showing some ♥ for Nx.</p>
       <div
         className="flex github-star-container"
@@ -41,7 +43,7 @@ export function Index() {
         </a>
       </div>
       <p>Here are some links to help you get started.</p>
-      <ul className="resources">
+      <ul className="resources" style={{ background: `var(--color-background-lvl-0)` }}>
         <li className="col-span-2">
           <a
             className="resource flex"

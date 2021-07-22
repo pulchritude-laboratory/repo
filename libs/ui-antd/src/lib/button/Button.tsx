@@ -1,5 +1,6 @@
-import './Button.module.scss'
+import s from './Button.module.scss'
 import { Button as Btn, ButtonProps as BtnProps } from 'antd'
+import { ReactNode } from 'react'
 
 /* eslint-disable-next-line */
 export interface ButtonProps {
@@ -8,13 +9,18 @@ export interface ButtonProps {
   shape?: BtnProps['shape'] | 'rectangle'
   color?: string
   onClick?: BtnProps['onClick']
+  children?: ReactNode
 }
 
 export function Button(props: ButtonProps) {
+  console.log('')
+
   return (
-    <Btn {...(props as any)} style={{ background: props.color }}>
-      {props.title ?? 'Button'}
-    </Btn>
+    <span className={s.shitbutton}>
+      <Btn {...(props as any)} className={s.wdsds}>
+        {props.title ?? props.children ?? 'Button'}
+      </Btn>
+    </span>
   )
 }
 

@@ -1,7 +1,10 @@
-import { AppProps } from 'next/app';
-import Head from 'next/head';
-import { ReactComponent as NxLogo } from '../public/nx-logo-white.svg';
-import './styles.css';
+import { AppProps } from 'next/app'
+import Head from 'next/head'
+import { ReactComponent as NxLogo } from '../public/nx-logo-white.svg'
+import './styles.css'
+
+import 'antd/dist/antd.css'
+import '../../../libs/ui-antd/src/style/index.scss'
 
 function CustomApp({ Component, pageProps }: AppProps) {
   return (
@@ -19,7 +22,7 @@ function CustomApp({ Component, pageProps }: AppProps) {
         </main>
       </div>
     </>
-  );
+  )
 }
 
-export default CustomApp;
+export default CustomApp
