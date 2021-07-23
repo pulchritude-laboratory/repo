@@ -1,0 +1,46 @@
+@import './../extends.scss';
+@import './_variables';
+
+// $prefix: $antPrefix + -menu;
+// $darkClass: $prefix + -dark;
+:root {
+  $color-background: transparent;
+
+  $color-item: $color-background;
+  $color-item-hover: var(--th-color-primary-translucent-base);
+  $color-item-active: var(--th-color-primary-translucent-muted);
+
+  $color-selected: var(--th-color-primary-base);
+  $color-selected-hover: var(--th-color-primary-vivid);
+  $color-selected-active: var(--th-color-primary-muted);
+
+  .ant-menu {
+    * {
+      @extend %disable-text-select;
+    }
+    background: $color-background !important;
+  }
+
+  .ant-menu-item-selected {
+    background: $color-selected !important;
+    &:hover {
+      background: $color-selected-hover !important;
+    }
+    &:active {
+      background: $color-selected-active !important;
+    }
+  }
+
+  .ant-menu-submenu-title,
+  .ant-menu-item {
+    background: $color-background;
+    margin: unset !important;
+    height: 3rem !important;
+    &:hover {
+      background: $color-item-hover;
+    }
+    &:active {
+      background: $color-item-active;
+    }
+  }
+}

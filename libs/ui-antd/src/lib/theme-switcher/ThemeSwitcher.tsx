@@ -18,7 +18,7 @@ interface ColorOptions {
 export interface ThemeSwitcherProps {}
 
 export function ThemeSwitcher(props: ThemeSwitcherProps) {
-  const { setTheme } = useTheme()
+  const { setTheme, fabricateTheme } = useTheme()
 
   const brightnessOptions = useMemo<BrightnessOptions[]>(
     () => [
@@ -54,11 +54,11 @@ export function ThemeSwitcher(props: ThemeSwitcherProps) {
   const handleColorChange = useCallback(
     (mode: ColorOptions['value']) => {
       if (mode === 'red') {
-        setTheme({ colors: [['--color-primary-base', '#aa0000']] })
+        fabricateTheme({ factoryColors: { primary: '#aa0000' } })
       } else if (mode === 'green') {
-        setTheme({ colors: [['--color-primary-base', '#00aa00']] })
+        fabricateTheme({ factoryColors: { primary: '#00aa00' } })
       } else if (mode === 'blue') {
-        setTheme({ colors: [['--color-primary-base', '#0000aa']] })
+        fabricateTheme({ factoryColors: { primary: '#0000aa' } })
       }
     },
     [setTheme]
@@ -100,9 +100,6 @@ export function ThemeSwitcher(props: ThemeSwitcherProps) {
           Blue
         </Button>
         <Button type="primary">Dumb</Button>
-        {/* <div></div>
-    <div></div>
-    <div></div> */}
       </div>
     </>
   )

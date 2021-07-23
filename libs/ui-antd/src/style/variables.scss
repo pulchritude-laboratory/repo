@@ -1,2 +1,14 @@
-$color-primary: var(--color-primary-base);
+$color-primary: var(--th-color-primary-base);
+$color-primary: var(--th-color-primary-muted);
+$color-primary: var(--th-color-primary-vivid);
+$color-primary-tr: var(--th-color-primary-translucent-base);
+$color-primary-tr-muted: var(--th-color-primary-translucent-muted);
+$color-primary-tr-vivid: var(--th-color-primary-translucent-vivid);
+
+$color-item-hover: var(--th-color-primary-translucent-base);
+$color-item-active: var(--th-color-primary-translucent-muted);
+
+$color-selected: var(--th-color-primary-base);
+$color-selected-hover: var(--th-color-primary-vivid);
+$color-selected-active: var(--th-color-primary-muted);
 // $color-primary: var(--color-primary-muted);

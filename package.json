@@ -4,6 +4,7 @@
   "license": "MIT",
   "scripts": {
     "wa": "nx serve web-admin",
+    "wa:scss": "ts-node ./apps/web-admin/scripts/generate-theme-files.ts",
     "nx": "nx",
     "start": "nx serve",
     "build": "nx build",
