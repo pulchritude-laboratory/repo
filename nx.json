@@ -41,6 +41,9 @@
     "ui-antd": {
       "tags": []
     },
+    "utils-theme-maker": {
+      "tags": []
+    },
     "web-admin": {
       "tags": []
     }

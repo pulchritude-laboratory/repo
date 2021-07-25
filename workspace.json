@@ -126,6 +126,27 @@
         }
       }
     },
+    "utils-theme-maker": {
+      "root": "libs/utils/theme-maker",
+      "sourceRoot": "libs/utils/theme-maker/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/utils/theme-maker/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/utils/theme-maker"],
+          "options": {
+            "jestConfig": "libs/utils/theme-maker/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
     "web-admin": {
       "root": "apps/web-admin",
       "sourceRoot": "apps/web-admin",

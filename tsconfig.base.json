@@ -16,7 +16,8 @@
     "baseUrl": ".",
     "paths": {
       "@repo/hooks": ["libs/hooks/src/index.ts"],
-      "@repo/ui-antd": ["libs/ui-antd/src/index.ts"]
+      "@repo/ui-antd": ["libs/ui-antd/src/index.ts"],
+      "@repo/utils/theme-maker": ["libs/utils/theme-maker/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
