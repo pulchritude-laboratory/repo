@@ -1,173 +1,189 @@
-@import './_variables';
+@import '../variables';
 
-$prefix: $antPrefix + -btn;
-$notClasses: '&:not(.#{$prefix}-primary):not(.#{$prefix}-dangerous):not(.#{$prefix}-link):not(.#{$antPrefix}-dropdown-trigger)';
-$ghostClass: '.#{$prefix}-background-ghost';
+$btn: ant-btn;
 
-%disabledStyle {
-  background-color: $bodyBackground;
-  color: $disabledColor;
-  &:hover {
-    background-color: $bodyBackground;
-    color: $disabledColor;
+.#{$btn} {
+  // background-color: ;
+
+  background: red !important;
+  &.#{$btn}-primary {
+    background: rgb(70, 121, 46) !important;
   }
 }
 
-%primaryButton {
-  &:not([disabled]) {
-    &:not(#{$ghostClass}) {
-      background-color: $primaryColor;
-      &:hover {
-        color: $primaryColor;
-        background-color: transparent;
-        text-shadow: none;
-      }
-    }
-    border-color: $primaryColor;
-    &:hover {
-      color: $primaryColor;
-      background-color: transparent;
-    }
-    &#{$ghostClass} {
-      color: $primaryColor;
-      &:hover {
-        color: $primaryHover;
-      }
-    }
-  }
-  &:disabled {
-    border-color: $borderColor;
-    &:hover {
-      border-color: $disabledColor;
-    }
-    &:not(#{$ghostClass}) {
-      @extend %disabledStyle;
-    }
-  }
-}
+// $notClasses: '&:not(.#{$prefix}-primary):not(.#{$prefix}-dangerous):not(.#{$prefix}-link):not(.#{$antPrefix}-dropdown-trigger)';
+// $ghostClass: '.#{$prefix}-background-ghost';
 
-%defaultButton {
-  &:not([disabled]) {
-    background-color: $componentBackground;
-    color: $textColor;
-    border-color: $borderColor;
-    &:hover {
-      color: $primaryColor;
-      border-color: $primaryColor;
-    }
-  }
-  &:disabled {
-    color: $disabledColor;
-    background-color: $bodyBackground;
-    border-color: $borderColor;
-  }
-}
+// %disabledStyle {
+//   background-color: $bodyBackground;
+//   color: $disabledColor;
+//   &:hover {
+//     background-color: $bodyBackground;
+//     color: $disabledColor;
+//   }
+// }
 
-%linkButton {
-  &:not(disabled) {
-    color: $primaryColor;
-    border: none;
-    &:hover,
-    &:focus {
-      color: $primaryHover;
-    }
-    &#{$ghostClass}:hover {
-      color: $primaryHover;
-    }
-  }
-  &:disabled {
-    color: $disabledColor;
-    &:hover {
-      color: $disabledColor;
-    }
-  }
-}
+// %primaryButton {
+//   &:not([disabled]) {
+//     &:not(#{$ghostClass}) {
+//       background-color: $primaryColor;
+//       color: $primaryContrast;
 
-%dangerButton {
-  &:not(disabled) {
-    background-color: $secondaryColor;
-    color: $secondaryHover;
-    border-color: $secondaryColor;
-    &:hover,
-    &:focus,
-    &:active {
-      background-color: transparent;
-      color: $secondaryColor;
-      border-color: $secondaryColor;
-    }
-  }
-  &:disabled {
-    @extend %disabledStyle;
-    border-color: $borderColor;
-    &:hover {
-      border-color: $borderColor;
-    }
-  }
-  &.#{$prefix}-link:disabled {
-    color: $disabledColor;
-    &:hover {
-      color: $disabledColor;
-    }
-  }
-  &.#{$prefix}-background-ghost {
-    border-color: $secondaryColor;
-    color: $secondaryColor;
-    &:hover,
-    &:focus,
-    &:active {
-      border-color: $secondaryColor;
-      color: $secondaryColor;
-    }
-  }
-}
+//       &:hover {
+//         color: $primaryContrast;
+//         background-color: $primaryHover;
+//         text-shadow: none;
+//       }
+//     }
+//     border-color: $primaryHover;
+//     &:hover {
+//       color: $primaryContrast;
+//       background-color: $primaryHover;
+//     }
+//     &:active {
+//       color: $primaryContrast;
+//       background-color: $primaryHover;
+//     }
+//     &#{$ghostClass} {
+//       color: $primaryColor;
+//       &:hover {
+//         color: $primaryHover;
+//       }
+//     }
+//   }
+//   &:disabled {
+//     border-color: $borderColor;
+//     &:hover {
+//       border-color: $disabledColor;
+//     }
+//     &:not(#{$ghostClass}) {
+//       @extend %disabledStyle;
+//     }
+//   }
+// }
 
-%ghostButton {
-  &:not(disabled) {
-    &.#{$prefix}-primary:hover,
-    &.#{$prefix}-primary:focus {
-      border-color: $primaryColor;
-    }
-  }
-  &:disabled {
-    color: $disabledColor;
-    &:hover {
-      color: $disabledColor;
-    }
-  }
-}
+// %defaultButton {
+//   &:not([disabled]) {
+//     background-color: $componentBackground;
+//     color: $textColor;
+//     border-color: $borderColor;
+//     &:hover {
+//       color: $primaryColor;
+//       border-color: $primaryColor;
+//     }
+//   }
+//   &:disabled {
+//     color: $disabledColor;
+//     background-color: $bodyBackground;
+//     border-color: $borderColor;
+//   }
+// }
 
-.#{$prefix}-primary {
-  @extend %primaryButton;
-}
-.#{$prefix}-link {
-  @extend %linkButton;
-}
-.#{$prefix}-dangerous {
-  @extend %dangerButton;
-}
-.#{$prefix}-background-ghost {
-  @extend %ghostButton;
-}
-.#{$prefix} {
-  &::before {
-    background: $bodyBackground;
-  }
+// %linkButton {
+//   &:not(disabled) {
+//     color: $primaryColor;
+//     border: none;
+//     &:hover,
+//     &:focus {
+//       color: $primaryHover;
+//     }
+//     &#{$ghostClass}:hover {
+//       color: $primaryHover;
+//     }
+//   }
+//   &:disabled {
+//     color: $disabledColor;
+//     &:hover {
+//       color: $disabledColor;
+//     }
+//   }
+// }
 
-  & > svg {
-    transition: margin-left 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
-  }
-  & > svg + span,
-  & > span + svg {
-    margin-left: 8px;
-  }
+// %dangerButton {
+//   &:not(disabled) {
+//     background-color: $secondaryColor;
+//     color: $secondaryHover;
+//     border-color: $secondaryColor;
+//     &:hover,
+//     &:focus,
+//     &:active {
+//       background-color: transparent;
+//       color: $secondaryColor;
+//       border-color: $secondaryColor;
+//     }
+//   }
+//   &:disabled {
+//     @extend %disabledStyle;
+//     border-color: $borderColor;
+//     &:hover {
+//       border-color: $borderColor;
+//     }
+//   }
+//   &.#{$prefix}-link:disabled {
+//     color: $disabledColor;
+//     &:hover {
+//       color: $disabledColor;
+//     }
+//   }
+//   &.#{$prefix}-background-ghost {
+//     border-color: $secondaryColor;
+//     color: $secondaryColor;
+//     &:hover,
+//     &:focus,
+//     &:active {
+//       border-color: $secondaryColor;
+//       color: $secondaryColor;
+//     }
+//   }
+// }
 
-  #{$notClasses} {
-    @extend %defaultButton;
-  }
-  &-lg {
-    font-size: 12px;
-  }
-  &-sm {
-    line-height: 100%;
-  }
-}
+// %ghostButton {
+//   &:not(disabled) {
+//     &.#{$prefix}-primary:hover,
+//     &.#{$prefix}-primary:focus {
+//       border-color: $primaryColor;
+//     }
+//   }
+//   &:disabled {
+//     color: $disabledColor;
+//     &:hover {
+//       color: $disabledColor;
+//     }
+//   }
+// }
+
+// .#{$prefix}-primary {
+//   @extend %primaryButton;
+// }
+// .#{$prefix}-link {
+//   @extend %linkButton;
+// }
+// .#{$prefix}-dangerous {
+//   @extend %dangerButton;
+// }
+// .#{$prefix}-background-ghost {
+//   @extend %ghostButton;
+// }
+// .#{$prefix} {
+//   &::before {
+//     background: $bodyBackground;
+//   }
+
+//   & > svg {
+//     transition: margin-left 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+//   }
+//   & > svg + span,
+//   & > span + svg {
+//     margin-left: 8px;
+//   }
+
+//   #{$notClasses} {
+//     @extend %defaultButton;
+//   }
+//   &-lg {
+//     font-size: 12px;
+//   }
+//   &-sm {
+//     line-height: 100%;
+//   }
+// }

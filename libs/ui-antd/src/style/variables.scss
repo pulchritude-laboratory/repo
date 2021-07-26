@@ -1,14 +1,30 @@
-$color-primary: var(--th-color-primary-base);
-$color-primary: var(--th-color-primary-muted);
-$color-primary: var(--th-color-primary-vivid);
-$color-primary-tr: var(--th-color-primary-translucent-base);
-$color-primary-tr-muted: var(--th-color-primary-translucent-muted);
-$color-primary-tr-vivid: var(--th-color-primary-translucent-vivid);
+// generated file
+$color-primary-base: var(--wa-color-primary-base);
+$color-primary-dark: var(--wa-color-primary-dark);
+$color-primary-bright: var(--wa-color-primary-bright);
+$color-primary-contrast: var(--wa-color-primary-contrast);
+$color-secondary-base: var(--wa-color-secondary-base);
+$color-secondary-dark: var(--wa-color-secondary-dark);
+$color-secondary-bright: var(--wa-color-secondary-bright);
+$color-secondary-contrast: var(--wa-color-secondary-contrast);
+$color-success-base: var(--wa-color-success-base);
+$color-success-dark: var(--wa-color-success-dark);
+$color-success-bright: var(--wa-color-success-bright);
+$color-success-contrast: var(--wa-color-success-contrast);
+$color-warning-base: var(--wa-color-warning-base);
+$color-warning-dark: var(--wa-color-warning-dark);
+$color-warning-bright: var(--wa-color-warning-bright);
+$color-warning-contrast: var(--wa-color-warning-contrast);
+$color-danger-base: var(--wa-color-danger-base);
+$color-danger-dark: var(--wa-color-danger-dark);
+$color-danger-bright: var(--wa-color-danger-bright);
+$color-danger-contrast: var(--wa-color-danger-contrast);
 
-$color-item-hover: var(--th-color-primary-translucent-base);
-$color-item-active: var(--th-color-primary-translucent-muted);
+$color-bg-lvl-0: var(--wa-color-background-lvl-0);
+$color-bg-lvl-1: var(--wa-color-background-lvl-1);
+$color-bg-component: var(--wa-color-background-component);
 
-$color-selected: var(--th-color-primary-base);
-$color-selected-hover: var(--th-color-primary-vivid);
-$color-selected-active: var(--th-color-primary-muted);
-// $color-primary: var(--color-primary-muted);
+$color-border-dominant: var(--wa-color-border-dominant);
+
+$shadow-normal: var(--wa-shadow-normal);
+$shadow-dominant: var(--wa-shadow-dominant);

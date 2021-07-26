@@ -1,8 +1,13 @@
-import { ThemeKeyMaker, ThemeVariableSegments } from '../theme'
+import { ThemeKeyMaker, ThemeVariableSegments } from '../'
 import * as fs from 'fs'
 
-const { backgroundTypes, colorTypes, colorVariants, shadowTypes, borderTypes } =
-  ThemeVariableSegments
+const {
+  steps: backgroundTypes,
+  colorTypes,
+  colorVariants,
+  shadowTypes,
+  borderTypes
+} = ThemeVariableSegments
 
 interface Parsers {
   color: (...args: Parameters<typeof ThemeKeyMaker.color>) => string
