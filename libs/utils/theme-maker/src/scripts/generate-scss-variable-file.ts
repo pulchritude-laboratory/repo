@@ -1,20 +1,8 @@
 import { ThemeKeyMaker, ThemeVariableSegments } from '../'
 import * as fs from 'fs'
 
-const {
-  steps: backgroundTypes,
-  colorTypes,
-  colorVariants,
-  shadowTypes,
-  borderTypes
-} = ThemeVariableSegments
-
-interface Parsers {
-  color: (...args: Parameters<typeof ThemeKeyMaker.color>) => string
-  backgroundColor: (...args: Parameters<typeof ThemeKeyMaker.backgroundColor>) => string
-  borderColor: (...args: Parameters<typeof ThemeKeyMaker.borderColor>) => string
-  shadow: (...args: Parameters<typeof ThemeKeyMaker.shadow>) => string
-}
+const { steps, components, colorTypes, colorVariants, shadowTypes, borderTypes, delayDurations } =
+  ThemeVariableSegments
 
 interface ExternalConfig {
   output?: string
@@ -22,32 +10,64 @@ interface ExternalConfig {
 }
 
 interface Config {
-  parsers: Parsers
+  parsers: typeof ThemeKeyMaker
 }
 
 export function generateScssVariableFile(externalConfig: ExternalConfig) {
   const config: Config = {
     parsers: {
       color: (t, v) => `$color-${t}-${v}`,
-      backgroundColor: t => `$color-bg-${t}`,
-      borderColor: t => `$color-border-${t}`,
-      shadow: t => `$shadow-${t}`
+      backgroundColor: c => `$color-bg-${c}`,
+      borderColor: c => `$border-color-${c}`,
+      borderRadius: r => `$border-radius-${r}`,
+      shadow: t => `$shadow-${t}`,
+      lightAngle: () => `$light-angle`,
+      delayDuration: d => `$delay-duration-${d}`
     }
   }
 
   const makeLine = (k: string, v: string) =>
     `${k}: var(${v.replace('--', externalConfig.prefix ? `--${externalConfig.prefix}-` : '--')});\n`
 
+  const makePropLine = (k: string, v: string) =>
+    `  "${k}": var(${v.replace(
+      '--',
+      externalConfig.prefix ? `--${externalConfig.prefix}-` : '--'
+    )}),\n`
+
   let content = '// generated file\n'
+
+  content += '\n@use "sass:map";\n'
+
+  content +=
+    '\n$color-types:' +
+    colorTypes.reduce<string>((acc, cur, i) => {
+      acc += `${i ? ', ' : ' '}${cur}`
+      return acc
+    }, '') +
+    ';\n\n'
 
   colorTypes.forEach(type => {
     colorVariants.forEach(variant => {
       content += makeLine(config.parsers.color(type, variant), ThemeKeyMaker.color(type, variant))
     })
+    content += '\n'
   })
 
   content += '\n'
-  backgroundTypes.forEach(type => {
+  colorTypes.forEach(type => {
+    content += `$color-${type}: (\n`
+    content += `  "type": ${type},\n`
+
+    colorVariants.forEach(variant => {
+      content += makePropLine(variant, ThemeKeyMaker.color(type, variant))
+    })
+
+    content += `);\n`
+  })
+
+  content += '\n'
+  steps.forEach(type => {
     content += makeLine(config.parsers.backgroundColor(type), ThemeKeyMaker.backgroundColor(type))
   })
 
@@ -61,24 +81,20 @@ export function generateScssVariableFile(externalConfig: ExternalConfig) {
     content += makeLine(config.parsers.shadow(type), ThemeKeyMaker.shadow(type))
   })
 
-  console.log(content)
-  console.log(externalConfig)
-  console.log(fs)
+  content += '\n'
+  components.forEach(c => {
+    content += makeLine(config.parsers.borderRadius(c), ThemeKeyMaker.borderRadius(c))
+  })
+
+  content += '\n'
+  delayDurations.forEach(d => {
+    content += makeLine(config.parsers.delayDuration(d), ThemeKeyMaker.delayDuration(d))
+  })
+
+  content += '\n'
+  content += makeLine(config.parsers.lightAngle(), ThemeKeyMaker.lightAngle())
+
   if (externalConfig.output) {
-    const file = fs.writeFileSync(externalConfig.output, content)
+    fs.writeFileSync(externalConfig.output, content)
   }
 }
-
-// const args = process.argv.slice(2).reduce<ExternalConfig>((acc, raw) => {
-//   if (raw.startsWith('--')) {
-//     const [k, v] = raw.replace('--', '').split('=')
-//     acc = { ...acc, [k]: v }
-//   }
-//   return acc
-// }, {})
-
-// console.log(args)
-
-// run(args)
-
-// export const scripts {}

@@ -1,13 +1,126 @@
+@use "sass:map";
 @import '../variables';
 
 $btn: ant-btn;
 
-.#{$btn} {
-  // background-color: ;
+@mixin shadow($color) {
+  $s: 0px 3px 10px 4px red;
+  box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034), 0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+    0 12.5px 10px rgba(0, 0, 0, 0.06);
+}
 
-  background: red !important;
-  &.#{$btn}-primary {
-    background: rgb(70, 121, 46) !important;
+.#{$btn} {
+  font-weight: 600;
+
+  border-radius: $border-radius-button;
+  box-shadow: none;
+
+  $delay: $delay-duration-5;
+  // transition: color $delay, background-color $delay, border-color $delay, border-radius $delay !important;
+
+  transition: all $delay !important;
+
+  @mixin btn($colors) {
+    &:not([disabled]) {
+      &.#{$btn}-#{map.get($colors, 'type')} {
+        color: map.get($colors, 'contrast');
+        border-color: map.get($colors, 'base');
+        background-color: map.get($colors, 'base');
+        transition: background-color 2s ease;
+
+        &:hover {
+          box-shadow: $shadow-button-primary;
+          background-color: map.get($colors, 'bright');
+          // background-color: orange;
+        }
+      }
+    }
+    &:is([disabled]) {
+      background-color: $color-disabled-base;
+      color: $color-disabled-half-contrast;
+      &:hover {
+        background: $color-disabled-bright;
+      }
+    }
+  }
+
+  @include btn($color-primary);
+  @include btn($color-secondary);
+  @include btn($color-danger);
+  @include btn($color-warning);
+  @include btn($color-default);
+
+  &.#{$btn}-default {
+    &:not([disabled]) {
+      border-color: $color-default-half-contrast;
+
+      &:hover {
+        border-color: $color-primary-tint;
+        color: $color-primary-darkest;
+        background-color: $color-primary-tint;
+      }
+      &:active {
+        filter: brightness(1.2);
+      }
+    }
+  }
+
+  &.#{$btn}-ghost {
+    font-weight: 600;
+
+    &:not([disabled]) {
+      background: transparent;
+      border-color: transparent;
+      color: $color-background-contrast;
+
+      &:hover {
+        box-shadow: $shadow-button-primary;
+        border-color: $color-primary-tint;
+        color: $color-primary-darkest;
+        background-color: $color-primary-tint;
+      }
+    }
+    &:is([disabled]) {
+      background-color: transparent;
+      border-color: transparent;
+      color: $color-disabled-half-contrast;
+      &:hover {
+        background: $color-disabled-bright;
+      }
+    }
+  }
+
+  &.#{$btn}-link {
+    &:not([disabled]) {
+      background: transparent;
+      border-color: transparent;
+      color: $color-primary-base;
+      font-weight: 600;
+
+      &:hover {
+        // box-shadow: $shadow-button-primary;
+        // border-color: $color-primary-tint;
+        color: $color-primary-darkest;
+        // background-color: $color-primary-tint;
+      }
+    }
+    &:is([disabled]) {
+      background-color: transparent;
+      border-color: transparent;
+      color: $color-disabled-half-contrast;
+      &:hover {
+        background: transparent;
+      }
+    }
+  }
+
+  &:active {
+    filter: brightness(0.97);
+    box-shadow: none;
+  }
+
+  &:active {
+    box-shadow: none !important;
   }
 }
 

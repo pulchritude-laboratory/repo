@@ -6,7 +6,7 @@ import {
   updateThemeCssVariables
 } from '@repo/utils/theme-maker'
 import { Button } from '../button/Button'
-import { Radio } from 'antd'
+import { Radio, Slider } from 'antd'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
 interface ColorOptions {
@@ -28,7 +28,7 @@ const mainPalette = createPalette([
 const successPalette = createPalette(['#00e772', '#04e700', '#41a900'], 7)
 const warningPalette = createPalette(['#f1ff1f', '#ebce00', 'e69c00'], 7)
 const dangerPalette = createPalette(['#e36206', '#ed1414', '#c20000'], 7)
-const backgroundGrayPalette = createPalette(['#000000', '#ffffff'], 7)
+const grayPalette = createPalette(['#000000', '#ffffff'], 15)
 // const palette2 = createPalette('rgb')
 
 /* eslint-disable-next-line */
@@ -164,6 +164,36 @@ export function ThemeSwitcher(props: ThemeSwitcherProps) {
           ))}
         </Radio.Group>
       </div>
+      Default
+      <div>
+        <Radio.Group
+          buttonStyle="solid"
+          onChange={e => {
+            setThemeSeed(s => ({ ...s, default: e.target.value }))
+          }}
+        >
+          {grayPalette.map(p => (
+            <Radio.Button style={{ background: p }} value={p}>
+              {p}
+            </Radio.Button>
+          ))}
+        </Radio.Group>
+      </div>
+      Disabled
+      <div>
+        <Radio.Group
+          buttonStyle="solid"
+          onChange={e => {
+            setThemeSeed(s => ({ ...s, disabled: e.target.value }))
+          }}
+        >
+          {grayPalette.map(p => (
+            <Radio.Button style={{ background: p }} value={p}>
+              {p}
+            </Radio.Button>
+          ))}
+        </Radio.Group>
+      </div>
       Background
       <div>
         <Radio.Group
@@ -172,21 +202,43 @@ export function ThemeSwitcher(props: ThemeSwitcherProps) {
             setThemeSeed(s => ({ ...s, background: e.target.value }))
           }}
         >
-          {[...backgroundGrayPalette, ...mainPalette].map(p => (
+          {[...grayPalette, ...mainPalette].map(p => (
             <Radio.Button style={{ background: p }} value={p}>
               {p}
             </Radio.Button>
           ))}
         </Radio.Group>
       </div>
+      Radius
       <div>
         <Radio.Group
-          defaultValue={colorOptions[0].value}
           buttonStyle="solid"
-          // onChange={e => handleColorChange(e.target.value)}
+          onChange={e => {
+            setThemeSeed(s => ({ ...s, borderRadius: e.target.value }))
+          }}
         >
-          {colorOptions.map(op => (
-            <Radio.Button value={op.value}>{op.label}</Radio.Button>
+          {[0, 0.1, 0.25, 0.3, 0.4, 0.5, 0.6, 0.75, 1].map(p => (
+            <Radio.Button style={{ margin: '5px', borderRadius: p + 'rem' }} value={p}>
+              {p}
+            </Radio.Button>
+          ))}
+        </Radio.Group>
+      </div>
+      Light Angle
+      <div>
+        <Radio.Group
+          buttonStyle="solid"
+          onChange={e => {
+            setThemeSeed(s => ({ ...s, lightAngle: e.target.value }))
+          }}
+        >
+          {[0, 10, 20, 30, 45, 60, 75, 90, 105, 120, 135, 150, 165, 180, 210, 225].map(p => (
+            <Radio.Button
+              style={{ margin: '5px', background: `linear-gradient(${p}deg, #66ff66, #007700)` }}
+              value={p}
+            >
+              {p}
+            </Radio.Button>
           ))}
         </Radio.Group>
       </div>

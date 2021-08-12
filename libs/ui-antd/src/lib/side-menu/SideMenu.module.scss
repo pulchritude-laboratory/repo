@@ -1,3 +1,5 @@
+@import '../../style/variables';
+
 .popup {
   // :root {
   &:global(.ant-menu-submenu-popup) {
@@ -20,5 +22,66 @@
         background: transparent;
       }
     }
+  }
+}
+.wrapper {
+  background-color: transparent;
+  height: 100%;
+  :global(.ant-layout-sider-children) {
+    display: grid;
+    grid-template-rows: min-content auto min-content;
+  }
+  .toggle {
+    position: absolute;
+
+    $size: 2.5rem;
+    top: calc(#{$size} * 0.25);
+
+    right: calc(#{$size} * -0.5);
+    height: $size;
+    width: $size;
+    z-index: 100;
+    border-radius: 50%;
+  }
+
+  .content {
+    overflow: auto;
+    direction: rtl;
+    * {
+      direction: ltr;
+    }
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+
+    $color: $color-background-base;
+    $shadow-color: $color-background-half-contrast;
+    // // $shadow-color: $color-primary-dark;
+    // background:
+    // /* Shadow covers */ linear-gradient($color 30%, rgba(255, 255, 255, 0)),
+    //   linear-gradient(rgba(255, 255, 255, 0), $color 70%) 0 100%,
+    //   /* Shadows */ radial-gradient(50% 0, farthest-side, $shadow-color, rgba(0, 0, 0, 0)),
+    //   radial-gradient(50% 100%, farthest-side, $shadow-color, rgba(0, 0, 0, 0)) 0 100%;
+    // background:
+    // /* Shadow covers */ linear-gradient($color 30%, rgba(255, 255, 255, 0)),
+    //   linear-gradient(rgba(255, 255, 255, 0), $color 70%) 0 100%,
+    //   /* Shadows */ radial-gradient(farthest-side at 50% 0, $shadow-color, rgba(0, 0, 0, 0)),
+    //   radial-gradient(farthest-side at 50% 100%, $shadow-color, rgba(0, 0, 0, 0)) 0 100%;
+    // background-repeat: no-repeat;
+    // // background-color: red;
+    // background-size: 100% 40px, 100% 40px, 100% 14px, 100% 14px;
+    // background-attachment: local, local, scroll, scroll;
+    // transition: background 2s;
+  }
+
+  .header {
+    border-bottom: 1px solid $color-background-darkest;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  .footer {
+    border-top: 1px solid $color-background-darkest;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
   }
 }

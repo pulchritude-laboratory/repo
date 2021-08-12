@@ -1,4 +1,7 @@
 .override {
+  * {
+    transition: background-color 0.5s ease;
+  }
   :root {
     .ant-button {
       background: orange;

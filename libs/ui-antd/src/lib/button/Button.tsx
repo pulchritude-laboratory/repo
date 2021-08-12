@@ -5,19 +5,20 @@ import { ReactNode } from 'react'
 /* eslint-disable-next-line */
 export interface ButtonProps {
   title?: BtnProps['title']
-  type?: BtnProps['type']
+  type?: 'default' | 'primary' | 'secondary' | 'danger' | 'warning' | 'ghost' | 'link'
   shape?: BtnProps['shape'] | 'rectangle'
   color?: string
   onClick?: BtnProps['onClick']
   children?: ReactNode
+  disabled?: boolean
 }
 
 export function Button(props: ButtonProps) {
   console.log('')
 
   return (
-    <span className={s.shitbutton}>
-      <Btn {...(props as any)} className={s.wdsds}>
+    <span className={`ant-btn-wrapper`}>
+      <Btn {...(props as any)} danger={props.type === 'danger'} className={`ant-btn-${props.type}`}>
         {props.title ?? props.children ?? 'Button'}
       </Btn>
     </span>

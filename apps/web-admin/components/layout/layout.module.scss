@@ -10,7 +10,7 @@
   grid-template-columns: min-content auto;
   grid-template-rows: 100vh;
 
-  background: rgb(179, 179, 179);
+  // background: var(--wa-color-background-base);
 
   .side {
     $height-header: 5rem;
@@ -31,7 +31,7 @@
       height: 5rem;
       // position: fixed;
       bottom: 0;
-      width: 100%;
+      // width: 100%;
       background: rgb(255, 47, 238);
     }
   }
@@ -40,6 +40,6 @@
     background: var(--color-background-lvl-0);
     overflow-y: hidden;
     overflow: auto;
-    width: 100%;
+    // width: 100%;
   }
 }

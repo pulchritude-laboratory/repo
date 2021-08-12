@@ -15,10 +15,53 @@ export function Index() {
       <h2 className="sss">Resources &amp; Tools</h2>
       <div style={{ height: '5rem' }}>
         <span style={{ padding: '1rem' }}>
-          <Button type="primary" title="test" onClick={() => setCounter(v => v + 1)} />
+          <Button type="primary" title="primary" onClick={() => setCounter(v => v + 1)} />
         </span>
         <span style={{ margin: '3rem' }}>
-          <Button type="default" title="test" onClick={() => setCounter(v => v + 1)} />
+          <Button type="secondary" title="secondary" onClick={() => setCounter(v => v + 1)} />
+        </span>
+        <span style={{ margin: '3rem' }}>
+          <Button type="default" title="default" onClick={() => setCounter(v => v + 1)} />
+        </span>
+        <span style={{ margin: '3rem' }}>
+          <Button type="ghost" title="ghost" onClick={() => setCounter(v => v + 1)} />
+        </span>
+        <span style={{ margin: '3rem' }}>
+          <Button type="danger" title="danger" onClick={() => setCounter(v => v + 1)} />
+        </span>
+        <span style={{ margin: '3rem' }}>
+          <Button type="warning" title="warning" onClick={() => setCounter(v => v + 1)} />
+        </span>
+        <span style={{ margin: '3rem' }}>
+          <Button type="link" title="link" onClick={() => setCounter(v => v + 1)} />
+        </span>
+      </div>
+      <div style={{ height: '5rem' }}>
+        <span style={{ padding: '1rem' }}>
+          <Button disabled type="primary" title="primary" onClick={() => setCounter(v => v + 1)} />
+        </span>
+        <span style={{ margin: '3rem' }}>
+          <Button
+            disabled
+            type="secondary"
+            title="secondary"
+            onClick={() => setCounter(v => v + 1)}
+          />
+        </span>
+        <span style={{ margin: '3rem' }}>
+          <Button disabled type="default" title="default" onClick={() => setCounter(v => v + 1)} />
+        </span>
+        <span style={{ margin: '3rem' }}>
+          <Button disabled type="ghost" title="ghost" onClick={() => setCounter(v => v + 1)} />
+        </span>
+        <span style={{ margin: '3rem' }}>
+          <Button disabled type="danger" title="danger" onClick={() => setCounter(v => v + 1)} />
+        </span>
+        <span style={{ margin: '3rem' }}>
+          <Button disabled type="warning" title="warning" onClick={() => setCounter(v => v + 1)} />
+        </span>
+        <span style={{ margin: '3rem' }}>
+          <Button disabled type="link" title="link" onClick={() => setCounter(v => v + 1)} />
         </span>
       </div>
 
