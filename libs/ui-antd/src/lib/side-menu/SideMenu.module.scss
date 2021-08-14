@@ -1,4 +1,5 @@
 @import '../../style/variables';
+@import '../../style/shadow';
 
 .popup {
   // :root {
@@ -31,32 +32,78 @@
     display: grid;
     grid-template-rows: min-content auto min-content;
   }
-  .toggle {
+
+  .toggleWrapper {
+    $wrap-size: 2.8rem;
+    $size: calc(#{$wrap-size} * 0.75);
+    $inner-offset: calc(#{$wrap-size} * 0.25 * 0.5);
     position: absolute;
+    right: calc(#{$wrap-size} * -0.5);
+    top: calc(#{$wrap-size} * 0.2);
+    // box-shadow: 0 1px 12px rgba(0, 0, 0, 0.397);
 
-    $size: 1.8rem;
-    top: calc(#{$size} * 0.35);
-    // padding-top: 2px;
+    // background-color: orange;
+    height: $wrap-size;
+    width: $wrap-size;
+    &::after {
+      content: '';
+      $shrink: 1.5px;
+      $radius: calc(#{$size} * 0.5 - #{$shrink});
+      width: $radius;
+      height: calc(#{$radius} * 2);
+      top: calc(#{$inner-offset} + (#{$shrink}));
+      left: calc(#{$inner-offset} + (#{$shrink}));
+      // background-color: red;
+      // z-index: 232;
+      position: absolute;
+      border-radius: calc(#{$size} * 0.5) 0 0 calc(#{$size} * 0.5);
+      // z-index: 1;
+      // box-shadow: 0 1px 12px rgba(0, 0, 0, 0.397);
+      @include outsetEdgeShadow();
+    }
+    .toggle {
+      position: absolute;
 
-    right: calc(#{$size} * -0.5);
-    height: $size;
-    width: $size;
-    padding: 0;
-    font-size: 1.2rem;
-    z-index: 100;
-    border-radius: 50%;
-    border: none;
-    box-shadow: 0 1px 12px rgba(0, 0, 0, 0.397);
+      // $size: 2rem;
+      top: $inner-offset;
 
-    background-color: $color-background-brightest;
-    color: $color-background-contrast;
-    transition: all $delay-duration-5;
+      right: $inner-offset;
+      height: $size;
+      width: $size;
+      padding: 0;
+      font-size: 1.2rem;
+      z-index: 100;
+      border-radius: 50%;
+      border-width: 0px;
+      border-color: $color-accent-brightest;
+      // border-color: transparent;
+      box-shadow: none;
 
-    svg {
-      height: 100%;
-      width: 100%;
-      padding: calc(#{$size} * 0.15);
-      transition: padding $delay-duration-2;
+      background-color: $color-background-base;
+      // background-color: transparent;
+      color: $color-background-contrast;
+      transition: all $delay-duration-5;
+      z-index: 2;
+      // box-shadow: 0 1px 12px rgba(0, 0, 0, 0.397);
+
+      &:hover {
+      }
+      svg {
+        height: 100%;
+        width: 100%;
+        padding: calc(#{$size} * 0.15);
+        transition: padding $delay-duration-2;
+      }
+      // &::after {
+      //   content: '';
+      //   width: 30px;
+      //   height: 30px;
+      //   background-color: red;
+
+      //   position: absolute;
+      //   right: 15px;
+      //   z-index: 1;
+      // }
     }
   }
 

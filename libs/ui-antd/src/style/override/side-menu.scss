@@ -2,6 +2,7 @@
 
 @import './../extends.scss';
 @import '../variables';
+@import '../shadow';
 
 $side-gap: 0.5rem;
 $item-gap: 0.3rem;
@@ -58,13 +59,9 @@ $delay-icon: 0.3s;
   bottom: 0;
 }
 
-@mixin edgeShadow($depth) {
-  box-shadow: inset -7px 0px 9px -7px rgb(0 0 0 / 70%);
-}
-
 %base-layer {
   background: linear-gradient(to bottom, colorBase('bright'), colorBase('dark'));
-  @include edgeShadow(3);
+  @include insetEdgeShadow();
 }
 
 %base-item {
@@ -244,8 +241,6 @@ $delay-icon: 0.3s;
           // padding-left: 1rem;
 
           .ant-menu-submenu-title {
-            // background-color: $color-background-base !important;
-            // &:hover {
             background: $color-background-contrast-02;
           }
         }
@@ -268,7 +263,7 @@ $delay-icon: 0.3s;
       //   padding-top: 0.45rem;
       // }
       &.ant-menu-submenu-inline.ant-menu-submenu-open {
-        @include edgeShadow(3);
+        @include insetEdgeShadow();
         background-color: colorBase('contrast-02');
         padding-top: 0.25rem;
         padding-bottom: 0.25rem;

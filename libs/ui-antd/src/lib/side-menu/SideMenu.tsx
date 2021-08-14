@@ -16,6 +16,7 @@ import { mdiBackburger, mdiMenu } from '@mdi/js'
 
 import { AiOutlineMenuFold, AiOutlineMenu } from 'react-icons/ai'
 import { MdAlarm } from 'react-icons/md'
+import useBreakpoint from 'antd/lib/grid/hooks/useBreakpoint'
 
 const { SubMenu } = Menu
 
@@ -38,36 +39,34 @@ export function SideMenu(props: SideMenuProps) {
   const { header, items, footer } = props
   const [collapsed, setCollapsed] = useState(false)
 
+  const breakpoints = useBreakpoint()
+
+  const skinnyViewport = breakpoints.xs
+  console.log('BBRR', breakpoints)
+
   return (
     <Layout.Sider
-      collapsedWidth={70}
-      // trigger={
-      //   <Button
-      //     className={$.toggle}
-      //     onClick={() => {
-      //       console.log('TOO')
-
-      //       setCollapsed(c => !c)
-      //     }}
-      //   >
-      //     C
-      //   </Button>
-      // }
+      breakpoint={'xs'}
+      onBreakpoint={v => {
+        console.log('BBR', v)
+      }}
+      collapsedWidth={skinnyViewport ? 0 : 70}
       trigger={null}
-      collapsible
       collapsed={collapsed}
       className={$.wrapper}
     >
-      <Button
-        className={$.toggle}
-        onClick={() => {
-          console.log('TOO')
+      <div className={$.toggleWrapper}>
+        <Button
+          className={$.toggle}
+          onClick={() => {
+            console.log('TOO')
 
-          setCollapsed(c => !c)
-        }}
-      >
-        {<Icon path={collapsed ? mdiMenu : mdiBackburger} />}
-      </Button>
+            setCollapsed(c => !c)
+          }}
+        >
+          {<Icon path={collapsed ? mdiMenu : mdiBackburger} />}
+        </Button>
+      </div>
       <div className={$.header}>{header}</div>
       <div className={$.content}>
         <Menu
