@@ -17,6 +17,9 @@ export function createTheme(seed: ThemeSeed): ThemeData {
 
   // const see
 
+  const bgLuminance = seed.background ? chroma(seed.background).luminance() : 0
+  const isDark = bgLuminance < 0.07
+
   const colorTypeMaker = (type?: ColorType) => {
     if (!type) return
 
@@ -60,6 +63,8 @@ export function createTheme(seed: ThemeSeed): ThemeData {
     theme.color?.push([colorKey('darkest'), darkest.hex()])
     theme.color?.push([colorKey('contrast'), contrast.hex()])
     theme.color?.push([colorKey('tint'), tint.hex()])
+    theme.color?.push([colorKey('contrast-02'), contrast.alpha(0.2).hex()])
+    theme.color?.push([colorKey('contrast-05'), contrast.alpha(0.5).hex()])
     if (lightContrast) {
       theme.color?.push([colorKey('half-contrast'), contrast.alpha(0.4).hex()])
     } else {
@@ -88,6 +93,7 @@ export function createTheme(seed: ThemeSeed): ThemeData {
     const colorKey = (type: ComponentType) => ThemeKeyMaker.borderRadius(type)
 
     theme.color?.push([colorKey('button'), reference + 'rem'])
+    theme.color?.push([colorKey('button-large'), reference * 1.3 + 'rem'])
     theme.color?.push([colorKey('input'), reference + 'rem'])
     theme.color?.push([colorKey('card'), reference * 2 + 'rem'])
   }
@@ -96,7 +102,7 @@ export function createTheme(seed: ThemeSeed): ThemeData {
     const baseline = 1
 
     ThemeVariableSegments.delayDurations.forEach(s =>
-      theme.color?.push([ThemeKeyMaker.delayDuration(s), `${s * 100 * 1}ms`])
+      theme.color?.push([ThemeKeyMaker.delayDuration(s), `${s * 100 * baseline}ms`])
     )
   }
 
@@ -104,10 +110,6 @@ export function createTheme(seed: ThemeSeed): ThemeData {
     const colorKey = (type: ShadowType) => ThemeKeyMaker.shadow(type)
     if (!seed.primary || !seed.background) return
     const primary = chroma(seed.primary)
-
-    const bgLuminance = chroma(seed.background).luminance()
-    console.log('KKK', { bgLuminance })
-    const isDark = bgLuminance < 0.07
 
     if (isDark) {
       theme.shadow?.push([
@@ -146,6 +148,20 @@ export function createTheme(seed: ThemeSeed): ThemeData {
     // theme.color?.push([colorKey('card'), reference * 2 + 'rem'])
   }
 
+  const scrollBarStyle = () => {
+    // const bg = seed.background ?? '#ffffff'
+    const bg = isDark ? '#fff' : '#000'
+
+    // const track = chroma(bg).set('lch.l', 0).hex()
+    // const handle = chroma(bg).set('lch.l', 1).hex()
+
+    const track = chroma(bg).alpha(0.15).hex()
+    const handle = chroma(bg).alpha(0.15).hex()
+
+    theme.color?.push([ThemeKeyMaker.scrollBarColor('handle'), handle])
+    theme.color?.push([ThemeKeyMaker.scrollBarColor('track'), track])
+  }
+
   ThemeVariableSegments.colorTypes.forEach(colorTypeMaker)
 
   theme.color?.push([
@@ -160,6 +176,8 @@ export function createTheme(seed: ThemeSeed): ThemeData {
   shadowMaker()
 
   delaySpeedMaker()
+
+  scrollBarStyle()
 
   console.log(' CTH', theme)
 

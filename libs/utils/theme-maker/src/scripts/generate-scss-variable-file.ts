@@ -1,8 +1,16 @@
 import { ThemeKeyMaker, ThemeVariableSegments } from '../'
 import * as fs from 'fs'
 
-const { steps, components, colorTypes, colorVariants, shadowTypes, borderTypes, delayDurations } =
-  ThemeVariableSegments
+const {
+  steps,
+  components,
+  colorTypes,
+  colorVariants,
+  shadowTypes,
+  borderTypes,
+  delayDurations,
+  scrollBarParts
+} = ThemeVariableSegments
 
 interface ExternalConfig {
   output?: string
@@ -22,7 +30,8 @@ export function generateScssVariableFile(externalConfig: ExternalConfig) {
       borderRadius: r => `$border-radius-${r}`,
       shadow: t => `$shadow-${t}`,
       lightAngle: () => `$light-angle`,
-      delayDuration: d => `$delay-duration-${d}`
+      delayDuration: d => `$delay-duration-${d}`,
+      scrollBarColor: p => `$color-scroll-bar-${p}`
     }
   }
 
@@ -89,6 +98,11 @@ export function generateScssVariableFile(externalConfig: ExternalConfig) {
   content += '\n'
   delayDurations.forEach(d => {
     content += makeLine(config.parsers.delayDuration(d), ThemeKeyMaker.delayDuration(d))
+  })
+
+  content += '\n'
+  scrollBarParts.forEach(p => {
+    content += makeLine(config.parsers.scrollBarColor(p), ThemeKeyMaker.scrollBarColor(p))
   })
 
   content += '\n'

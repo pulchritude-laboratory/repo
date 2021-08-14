@@ -11,15 +11,20 @@ import {
 } from '@ant-design/icons'
 import { useState } from 'react'
 import { ReactNode } from 'react'
+import { Icon } from '@mdi/react'
+import { mdiBackburger, mdiMenu } from '@mdi/js'
 
 import { AiOutlineMenuFold, AiOutlineMenu } from 'react-icons/ai'
+import { MdAlarm } from 'react-icons/md'
 
 const { SubMenu } = Menu
 
 export interface SideMenuItem {
   key?: string
+  to?: string
+  label?: ReactNode
   icon?: ReactNode
-  subItems?: SideMenuItem[]
+  subItems?: Omit<SideMenuItem, 'subItems'>[]
 }
 
 /* eslint-disable-next-line */
@@ -30,12 +35,12 @@ export interface SideMenuProps {
 }
 
 export function SideMenu(props: SideMenuProps) {
-  const { header, footer } = props
+  const { header, items, footer } = props
   const [collapsed, setCollapsed] = useState(false)
 
   return (
     <Layout.Sider
-      collapsedWidth={80}
+      collapsedWidth={70}
       // trigger={
       //   <Button
       //     className={$.toggle}
@@ -61,7 +66,7 @@ export function SideMenu(props: SideMenuProps) {
           setCollapsed(c => !c)
         }}
       >
-        {collapsed ? <AiOutlineMenu /> : <AiOutlineMenuFold />}
+        {<Icon path={collapsed ? mdiMenu : mdiBackburger} />}
       </Button>
       <div className={$.header}>{header}</div>
       <div className={$.content}>
@@ -72,80 +77,48 @@ export function SideMenu(props: SideMenuProps) {
           theme="dark"
           // inlineCollapsed={true}
         >
-          <Menu.Item key="1" icon={<PieChartOutlined />}>
-            Option 1
-          </Menu.Item>
-          <Menu.Item key="2" icon={<DesktopOutlined />}>
-            Option 2
-          </Menu.Item>
-          <Menu.Item key="3" icon={<ContainerOutlined />}>
-            Option 3
-          </Menu.Item>
-          <SubMenu
-            popupClassName={$.popup}
-            key="sub1"
-            icon={<MailOutlined />}
-            title="Navigation One"
-          >
-            <Menu.Item key="5">Option 5</Menu.Item>
-            <Menu.Item key="6">Option 6</Menu.Item>
-            <Menu.Item key="7">Option 7</Menu.Item>
-            <Menu.Item key="8">Option 8</Menu.Item>
-          </SubMenu>
-          <SubMenu key="sub2" icon={<AppstoreOutlined />} title="Navigation Two">
-            <Menu.Item key="9">Option 9</Menu.Item>
-            <Menu.Item key="10">Option 10</Menu.Item>
-            <SubMenu key="sub3" title="Submenu">
-              <Menu.Item key="11">Option 11</Menu.Item>
-              <Menu.Item key="12">Option 12</Menu.Item>
-            </SubMenu>
-          </SubMenu>
-          <SubMenu key="sub2" icon={<MailOutlined />} title="Navigation One">
-            <Menu.Item key="5">Option 5</Menu.Item>
-            <Menu.Item key="6">Option 6</Menu.Item>
-            <Menu.Item key="7">Option 7</Menu.Item>
-            <Menu.Item key="8">Option 8</Menu.Item>
-          </SubMenu>
-          <SubMenu key="sub3" icon={<AppstoreOutlined />} title="Navigation Two">
-            <Menu.Item key="9">Option 9</Menu.Item>
-            <Menu.Item key="10">Option 10</Menu.Item>
-            <SubMenu key="sub3" title="Submenu">
-              <Menu.Item key="11">Option 11</Menu.Item>
-              <Menu.Item key="12">Option 12</Menu.Item>
-            </SubMenu>
-          </SubMenu>
-          <SubMenu key="sub4" icon={<MailOutlined />} title="Navigation One">
-            <Menu.Item key="5">Option 5</Menu.Item>
-            <Menu.Item key="6">Option 6</Menu.Item>
-            <Menu.Item key="7">Option 7</Menu.Item>
-            <Menu.Item key="8">Option 8</Menu.Item>
-          </SubMenu>
-          <SubMenu key="sub5" icon={<AppstoreOutlined />} title="Navigation Two">
-            <Menu.Item key="9">Option 9</Menu.Item>
-            <Menu.Item key="10">Option 10</Menu.Item>
-            <SubMenu key="sub3" title="Submenu">
-              <Menu.Item key="11">Option 11</Menu.Item>
-              <Menu.Item key="12">Option 12</Menu.Item>
-            </SubMenu>
-          </SubMenu>
+          {items?.map(item => {
+            if (item.subItems) {
+              return (
+                <SubMenu
+                  key={item.to ?? item.key}
+                  title={item.label}
+                  icon={item.icon}
+                  popupClassName={$.popup}
+                >
+                  {item.subItems.map(subItem => (
+                    <Menu.Item key={subItem.to ?? subItem.key} icon={subItem.icon}>
+                      {subItem.label}
+                    </Menu.Item>
+                  ))}
+                </SubMenu>
+              )
+            }
+
+            return (
+              <Menu.Item key={item.to ?? item.key} icon={item.icon}>
+                {item.label}
+              </Menu.Item>
+            )
+          })}
         </Menu>
       </div>
 
       <div className={$.footer}>
-        <Menu
+        {/* <Menu
           defaultSelectedKeys={['1']}
           defaultOpenKeys={['sub2']}
           mode="inline"
           theme="dark"
           // inlineCollapsed={true}
         >
-          <Menu.Item key="1" icon={<PieChartOutlined />}>
+          <Menu.Item key="12" icon={<AiOutlineMenu />}>
             FOP 1
           </Menu.Item>
-          <Menu.Item key="2" icon={<DesktopOutlined />}>
+          <Menu.Item key="32" icon={<MdAlarm />}>
             FOP 2
           </Menu.Item>
-        </Menu>
+        </Menu> */}
         {footer}
       </div>
     </Layout.Sider>

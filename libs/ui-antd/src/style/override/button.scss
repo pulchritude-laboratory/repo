@@ -20,17 +20,17 @@ $btn: ant-btn;
 
   transition: all $delay !important;
 
-  @mixin btn($colors) {
+  @mixin btn($color) {
     &:not([disabled]) {
-      &.#{$btn}-#{map.get($colors, 'type')} {
-        color: map.get($colors, 'contrast');
-        border-color: map.get($colors, 'base');
-        background-color: map.get($colors, 'base');
-        transition: background-color 2s ease;
+      &.#{$btn}-#{map.get($color, 'type')} {
+        color: map.get($color, 'contrast');
+        border-color: map.get($color, 'base');
+        background-color: map.get($color, 'base');
+        // transition: background-color 2s ease;
 
         &:hover {
           box-shadow: $shadow-button-primary;
-          background-color: map.get($colors, 'bright');
+          background-color: map.get($color, 'bright');
           // background-color: orange;
         }
       }

@@ -88,6 +88,36 @@ export function ThemeSwitcher(props: ThemeSwitcherProps) {
   return (
     <>
       <div></div>
+      Background
+      <div>
+        <Radio.Group
+          buttonStyle="solid"
+          onChange={e => {
+            setThemeSeed(s => ({ ...s, background: e.target.value }))
+          }}
+        >
+          {[...grayPalette, ...mainPalette].map(p => (
+            <Radio.Button style={{ background: p }} value={p}>
+              {p}
+            </Radio.Button>
+          ))}
+        </Radio.Group>
+      </div>
+      Background accent
+      <div>
+        <Radio.Group
+          buttonStyle="solid"
+          onChange={e => {
+            setThemeSeed(s => ({ ...s, accent: e.target.value }))
+          }}
+        >
+          {[...grayPalette, ...mainPalette].map(p => (
+            <Radio.Button style={{ background: p }} value={p}>
+              {p}
+            </Radio.Button>
+          ))}
+        </Radio.Group>
+      </div>
       Primary
       <div>
         <Radio.Group
@@ -188,21 +218,6 @@ export function ThemeSwitcher(props: ThemeSwitcherProps) {
           }}
         >
           {grayPalette.map(p => (
-            <Radio.Button style={{ background: p }} value={p}>
-              {p}
-            </Radio.Button>
-          ))}
-        </Radio.Group>
-      </div>
-      Background
-      <div>
-        <Radio.Group
-          buttonStyle="solid"
-          onChange={e => {
-            setThemeSeed(s => ({ ...s, background: e.target.value }))
-          }}
-        >
-          {[...grayPalette, ...mainPalette].map(p => (
             <Radio.Button style={{ background: p }} value={p}>
               {p}
             </Radio.Button>

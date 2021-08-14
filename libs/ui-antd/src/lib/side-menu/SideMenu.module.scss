@@ -34,14 +34,30 @@
   .toggle {
     position: absolute;
 
-    $size: 2.5rem;
-    top: calc(#{$size} * 0.25);
+    $size: 1.8rem;
+    top: calc(#{$size} * 0.35);
+    // padding-top: 2px;
 
     right: calc(#{$size} * -0.5);
     height: $size;
     width: $size;
+    padding: 0;
+    font-size: 1.2rem;
     z-index: 100;
     border-radius: 50%;
+    border: none;
+    box-shadow: 0 1px 12px rgba(0, 0, 0, 0.397);
+
+    background-color: $color-background-brightest;
+    color: $color-background-contrast;
+    transition: all $delay-duration-5;
+
+    svg {
+      height: 100%;
+      width: 100%;
+      padding: calc(#{$size} * 0.15);
+      transition: padding $delay-duration-2;
+    }
   }
 
   .content {
@@ -77,11 +93,13 @@
     border-bottom: 1px solid $color-background-darkest;
     padding-top: 1rem;
     padding-bottom: 1rem;
+    width: 100%;
   }
 
   .footer {
     border-top: 1px solid $color-background-darkest;
     padding-top: 1rem;
     padding-bottom: 1rem;
+    width: 100%;
   }
 }

@@ -1,52 +1,279 @@
+@use "sass:map";
+
 @import './../extends.scss';
 @import '../variables';
 
-// $prefix: $antPrefix + -menu;
-// $darkClass: $prefix + -dark;
+$side-gap: 0.5rem;
+$item-gap: 0.3rem;
+$delay-color: 3s;
+$delay-icon: 0.3s;
+
+@function colorBase($variant) {
+  @return map.get($color-accent, $variant);
+}
+
+@function colorSelected($variant) {
+  @return map.get($color-background, $variant);
+}
+
+@mixin collapsedItemSize() {
+  @include itemContentSize(1.7rem);
+  padding-left: 1rem;
+  padding-top: 0.45rem;
+}
+
+@mixin itemContentColor($color) {
+  .ant-menu-title-content {
+    @extend %disable-text-select;
+    color: $color !important;
+    font-size: 1rem;
+  }
+  .ant-menu-submenu-arrow {
+    &::before,
+    &::after {
+      background-color: $color;
+    }
+  }
+
+  .anticon > svg,
+  svg {
+    fill: $color;
+    color: $color;
+  }
+}
+
+@mixin itemContentSize($icon) {
+  .anticon > svg,
+  svg {
+    transition: all $delay-icon;
+
+    height: $icon;
+    width: $icon;
+  }
+}
+
+%stick-around {
+  position: sticky;
+  top: 0;
+  bottom: 0;
+}
+
+@mixin edgeShadow($depth) {
+  box-shadow: inset -7px 0px 9px -7px rgb(0 0 0 / 70%);
+}
+
+%base-layer {
+  background: linear-gradient(to bottom, colorBase('bright'), colorBase('dark'));
+  @include edgeShadow(3);
+}
+
+%base-item {
+  overflow: revert !important;
+
+  $item-height: 45px;
+  height: $item-height;
+  line-height: $item-height;
+
+  width: calc(100% - #{$side-gap}) !important;
+  margin-left: $side-gap;
+
+  border-radius: $border-radius-button-large 0 0 $border-radius-button-large;
+  padding-left: 0.75rem !important;
+
+  @include itemContentColor(colorBase('contrast'));
+  @include itemContentSize(1.2rem);
+
+  // transition: padding ;
+
+  &::before {
+    content: '';
+    position: absolute;
+    z-index: 100;
+    top: -16px;
+    right: -40px;
+    height: 16px;
+    width: 9px;
+
+    opacity: 0;
+
+    border-radius: 100% 0 100% 0/0 0 100% 100%;
+    background: transparent;
+    box-shadow: 1px 4px 0 0 $color-background-base;
+
+    transition: all 0.2s ease-out;
+  }
+  &::after {
+    content: '';
+    position: absolute;
+    z-index: 100;
+    bottom: 16px;
+
+    right: -40px;
+    height: 16px;
+    width: 9px;
+    top: calc(#{$item-height} - 0.1px);
+
+    opacity: 0;
+
+    border-radius: 0 100% 0 0/0 100% 0 100%;
+    background: transparent;
+    box-shadow: 1px -4px 0 0 $color-background-base;
+    transition: all 0.2s ease-out;
+  }
+}
+
+%stick-around {
+  position: sticky;
+  top: 0;
+  bottom: 0;
+  z-index: 10;
+}
+
+%selected {
+  @extend %stick-around;
+
+  background-color: $color-background-base;
+  padding-left: 0.9rem !important;
+  overflow: revert !important;
+
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
+    rgba(0, 0, 0, 0.2) 0px -0.5px 0px inset;
+
+  @include itemContentColor(colorSelected('contrast'));
+
+  &:hover {
+    background-color: $color-background-base !important;
+  }
+
+  &::before {
+    right: -2px;
+    opacity: 1;
+  }
+  &::after {
+    right: -2px;
+    opacity: 1;
+  }
+}
+
+%selected-mini {
+  &::before {
+    opacity: 0;
+  }
+  &::after {
+    opacity: 0;
+  }
+}
+
 :root {
-  $color-background: transparent;
-  // $color-background-contrast: $color-background-contrast;
-
-  $color-item: $color-background;
-  $color-item-hover: $color-primary-base;
-  $color-item-active: var(--th-color-primary-translucent-muted);
-
-  $color-selected: var(--th-color-primary-base);
-  $color-selected-hover: var(--th-color-primary-vivid);
-  $color-selected-active: var(--th-color-primary-muted);
+  .ant-layout-sider {
+    @extend %base-layer;
+  }
 
   .ant-menu {
-    * {
-      @extend %disable-text-select;
-      color: $color-background-contrast;
-      font-size: 1rem;
+    $side-gap: 0.5rem;
+    $item-gap: 0.3rem;
+
+    overflow: revert !important;
+
+    background-color: transparent;
+
+    &.ant-menu-sub.ant-menu-inline {
+      background-color: transparent;
     }
-    background: $color-background !important;
+
+    .ant-menu-submenu {
+      padding: 0;
+    }
+    .ant-menu-submenu-title,
+    .ant-menu-item {
+      @extend %base-item;
+
+      &:hover {
+        background: $color-background-contrast-02;
+      }
+
+      &.ant-menu-item-selected {
+        @extend %selected;
+      }
+    }
+    .ant-menu-submenu {
+      &.ant-menu-submenu-selected {
+        &:not(.ant-menu-submenu-open) {
+          .ant-menu-submenu-title {
+            @extend %selected;
+            // padding-left: 1rem !important;
+          }
+        }
+      }
+      &.ant-menu-submenu-open {
+        .ant-menu-submenu-title {
+          padding-left: 0.4rem !important;
+        }
+      }
+      .ant-menu-item {
+        padding-left: 2rem !important;
+      }
+      .ant-menu-submenu-title {
+        // padding-left: 1rem !important;
+      }
+    }
+
     &.ant-menu-inline-collapsed {
-      width: 80px;
+      .ant-menu-submenu {
+        &.ant-menu-submenu-selected {
+          .ant-menu-submenu-title {
+            @extend %selected-mini;
+          }
+        }
+      }
+      .ant-menu-item-selected {
+        @extend %selected-mini;
+      }
     }
-  }
+    &.ant-menu-inline-collapsed {
+      .ant-menu-submenu {
+        // background-color: $color-background-base !important;
 
-  .ant-menu-item-selected {
-    background: $color-selected !important;
-    &:hover {
-      background: $color-selected-hover !important;
-    }
-    &:active {
-      background: $color-selected-active !important;
-    }
-  }
+        // padding: 0px;
+        .ant-menu-submenu-title {
+          @include itemContentSize(1.7rem);
+          padding-left: 1rem;
+          padding-top: 0.4rem;
+        }
+        &.ant-menu-submenu-open {
+          // padding-left: 1rem;
 
-  .ant-menu-submenu-title,
-  .ant-menu-item {
-    background: $color-background;
-    margin: unset !important;
-    height: 3rem !important;
-    &:hover {
-      background: $color-item-hover;
+          .ant-menu-submenu-title {
+            // background-color: $color-background-base !important;
+            // &:hover {
+            background: $color-background-contrast-02;
+          }
+        }
+      }
+      .ant-menu-item {
+        @include itemContentSize(1.7rem);
+        padding-left: 1rem;
+        padding-top: 0.4rem;
+      }
     }
-    &:active {
-      background: $color-item-active;
+
+    .ant-menu-submenu {
+      transition: all 0.2s;
+      padding-top: 0.001rem;
+      border-radius: $border-radius-button-large 0 0 $border-radius-button-large;
+
+      // .ant-menu-submenu-title {
+      //   @include itemContentSize(1.7rem);
+      //   padding-left: 1rem;
+      //   padding-top: 0.45rem;
+      // }
+      &.ant-menu-submenu-inline.ant-menu-submenu-open {
+        @include edgeShadow(3);
+        background-color: colorBase('contrast-02');
+        padding-top: 0.25rem;
+        padding-bottom: 0.25rem;
+        margin-left: 0.5rem;
+      }
     }
   }
 }

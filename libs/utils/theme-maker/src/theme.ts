@@ -7,23 +7,29 @@ export const ThemeVariableSegments = {
     'warning',
     'danger',
     'disabled',
-    'background'
+    'background',
+    'accent'
   ],
   colorVariants: [
     'base',
+    'base-rgb',
     'bright',
     'brightest',
     'dark',
     'darkest',
     'contrast',
+    'contrast-rgb',
+    'contrast-05',
+    'contrast-02',
     'half-contrast',
     'tint'
   ],
   steps: ['0', '100', '200', '300', '400', '500', '600', '700', '800', '900'],
-  components: ['card', 'button', 'input'],
+  components: ['card', 'button', 'button-large', 'input'],
   shadowTypes: ['bg-500', 'bg-600', 'button-primary', 'button-secondary', 'button-default'],
   borderTypes: ['dominant'],
-  delayDurations: [5, 10, 15, 20]
+  delayDurations: [2, 5, 10, 15, 20],
+  scrollBarParts: ['track', 'handle']
 } as const
 
 export type ColorType = typeof ThemeVariableSegments.colorTypes[number]
@@ -33,6 +39,7 @@ export type ShadowType = typeof ThemeVariableSegments.shadowTypes[number]
 export type BorderType = typeof ThemeVariableSegments.borderTypes[number]
 export type ComponentType = typeof ThemeVariableSegments.components[number]
 export type DelayDuration = typeof ThemeVariableSegments.delayDurations[number]
+export type ScrollBarParts = typeof ThemeVariableSegments.scrollBarParts[number]
 
 export const ThemeKeyMaker = {
   color: (type: ColorType, variant: ColorVariant) => `--color-${type}-${variant}`,
@@ -41,7 +48,8 @@ export const ThemeKeyMaker = {
   borderRadius: (type: ComponentType) => `--border-color-${type}`,
   lightAngle: () => `--light-angle`,
   shadow: (type: ShadowType) => `--shadow-${type}`,
-  delayDuration: (type: DelayDuration) => `--delay-duration-${type}`
+  delayDuration: (type: DelayDuration) => `--delay-duration-${type}`,
+  scrollBarColor: (part: ScrollBarParts) => `--color-scroll-bar-${part}`
 }
 
 export type HEXAColor = `#${string}`
@@ -68,6 +76,7 @@ export interface ThemeSeed {
   warning?: HEXAColor
   danger?: HEXAColor
   background?: HEXAColor
+  accent?: HEXAColor
   borderRadius?: number
   lightAngle?: number
 }
