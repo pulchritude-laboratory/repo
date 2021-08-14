@@ -45,6 +45,8 @@
     // background-color: orange;
     height: $wrap-size;
     width: $wrap-size;
+    transition: right $delay-duration-2 ease-out !important;
+
     &::after {
       content: '';
       $shrink: 1.5px;
@@ -82,10 +84,14 @@
       background-color: $color-background-base;
       // background-color: transparent;
       color: $color-background-contrast;
-      transition: all $delay-duration-5;
+      transition: right $delay-duration-2 !important;
+      // transition: unset !important;
       z-index: 2;
       // box-shadow: 0 1px 12px rgba(0, 0, 0, 0.397);
-
+      &.offsetLeft {
+        // background: red;
+        right: -1.8rem;
+      }
       &:hover {
       }
       svg {
@@ -104,6 +110,14 @@
       //   right: 15px;
       //   z-index: 1;
       // }
+    }
+
+    &.offsetLeft {
+      // background: red;
+      right: calc(#{$wrap-size} * -1.2);
+      &::after {
+        opacity: 0;
+      }
     }
   }
 

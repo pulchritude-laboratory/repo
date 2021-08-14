@@ -17,6 +17,7 @@ import { mdiBackburger, mdiMenu } from '@mdi/js'
 import { AiOutlineMenuFold, AiOutlineMenu } from 'react-icons/ai'
 import { MdAlarm } from 'react-icons/md'
 import useBreakpoint from 'antd/lib/grid/hooks/useBreakpoint'
+import cn from 'classnames'
 
 const { SubMenu } = Menu
 
@@ -55,9 +56,9 @@ export function SideMenu(props: SideMenuProps) {
       collapsed={collapsed}
       className={$.wrapper}
     >
-      <div className={$.toggleWrapper}>
+      <div className={cn($.toggleWrapper, { [$.offsetLeft]: skinnyViewport && collapsed })}>
         <Button
-          className={$.toggle}
+          className={cn($.toggle)}
           onClick={() => {
             console.log('TOO')
 
