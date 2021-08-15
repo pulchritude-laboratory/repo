@@ -1,4 +1,5 @@
 @import '../_generated';
+@import '../shadow';
 
 @mixin menuPopup() {
   $border-radius: $border-radius-button-large;
@@ -19,7 +20,7 @@
       top: 16px;
       transform: rotate(45deg);
     }
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+    @include popoverShadow();
 
     background-color: $color-accent-base;
     border-radius: $border-radius-all;

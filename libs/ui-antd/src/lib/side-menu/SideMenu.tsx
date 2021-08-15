@@ -1,17 +1,10 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import { Button, Layout, Menu, MenuItemProps } from 'antd'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 import $ from './SideMenu.module.scss'
-import {
-  AppstoreOutlined,
-  MenuUnfoldOutlined,
-  MenuFoldOutlined,
-  PieChartOutlined,
-  DesktopOutlined,
-  ContainerOutlined,
-  MailOutlined
-} from '@ant-design/icons'
+
 import { useCallback, useEffect, useState } from 'react'
 import { ReactNode } from 'react'
 import { Icon } from '@mdi/react'
@@ -54,9 +47,7 @@ export function SideMenu(props: SideMenuProps) {
 
   const breakpoints = useBreakpoint()
 
-  const defaultKey = keyMaker(items?.[0])
   const skinnyViewport = breakpoints.xs
-  console.log('BBRR', breakpoints)
 
   const renderMenu = useCallback(
     (menuItems?: SideMenuItem[]) => {
@@ -91,7 +82,7 @@ export function SideMenu(props: SideMenuProps) {
             const content = (it?: SideMenuItem) => {
               return it?.to ? (
                 <Link href={it?.to ?? currentRoute}>
-                  <div>{it.label}</div>
+                  <a>{it.label} LLL</a>
                 </Link>
               ) : (
                 it?.label ?? '???'
@@ -109,9 +100,10 @@ export function SideMenu(props: SideMenuProps) {
                 >
                   {item.subItems.map(subItem => (
                     <Menu.Item key={subItem.to ?? subItem.key} icon={subItem.icon}>
-                      <Link href={subItem?.to ?? currentRoute}>
+                      {content(subItem)}
+                      {/* <Link href={subItem?.to ?? currentRoute}>
                         <div>{subItem.label}</div>
-                      </Link>
+                      </Link> */}
                     </Menu.Item>
                   ))}
                 </SubMenu>

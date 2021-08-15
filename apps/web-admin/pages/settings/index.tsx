@@ -1,7 +1,9 @@
-import { Button, ThemeSwitcher } from '@repo/ui-antd'
+import { NP } from '../../utils/types'
+import { wrapPrivateLayout } from '../../components/layout/private/private-layout'
 import { useState } from 'react'
+import { Button, ThemeSwitcher } from '@repo/ui-antd'
 
-export function Page() {
+const Page: NP = () => {
   /*
    * Replace the elements below with your own.
    *
@@ -68,5 +70,7 @@ export function Page() {
     </div>
   )
 }
+
+Page.getLayout = wrapPrivateLayout
 
 export default Page

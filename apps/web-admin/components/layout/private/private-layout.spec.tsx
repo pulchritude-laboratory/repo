@@ -1,10 +1,10 @@
 import { render } from '@testing-library/react'
 
-import Layout from './layout'
+import { PrivateLayout } from './private-layout'
 
-describe('Layout', () => {
+describe('Private Layout', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<Layout />)
+    const { baseElement } = render(<PrivateLayout />)
     expect(baseElement).toBeTruthy()
   })
 })

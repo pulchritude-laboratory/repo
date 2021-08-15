@@ -1,4 +1,4 @@
-import $ from './layout.module.scss'
+import $ from './private-layout.module.scss'
 import { SideMenu, SideMenuItem, SideMenuProps } from '@repo/ui-antd'
 import { ReactNode, useMemo } from 'react'
 import { FaLightbulb } from 'react-icons/fa'
@@ -17,15 +17,19 @@ import {
   mdiScriptTextPlay,
   mdiViewDashboard
 } from '@mdi/js'
-import { Logo } from './logo/Logo'
+// import { Logo } from '../../logo/Logo'
+import { useRouter } from 'next/router'
+import { Logo } from '../../logo/Logo'
 
-export interface LayoutProps {
+export interface PrivateLayoutProps {
   children?: ReactNode
 }
 
 const t = (s: string) => s.split('.').pop()
 
-export function Layout(props: LayoutProps) {
+export function PrivateLayout(props: PrivateLayoutProps) {
+  const router = useRouter()
+
   const menuItems = useMemo(() => {
     const items: SideMenuProps['items'] = [
       {
@@ -112,11 +116,12 @@ export function Layout(props: LayoutProps) {
         key: 'sign-out',
         type: 'action',
         label: t('menu.sign-out'),
-        icon: <Icon path={mdiLogout} />
+        icon: <Icon path={mdiLogout} />,
+        onClick: () => router.push('/')
       }
     ]
     return items
-  }, [])
+  }, [router])
 
   return (
     <div className={$.layout}>
@@ -141,4 +146,8 @@ export function Layout(props: LayoutProps) {
   )
 }
 
-export default Layout
+export function wrapPrivateLayout(page: ReactNode) {
+  return <PrivateLayout>{page}</PrivateLayout>
+}
+
+export default PrivateLayout

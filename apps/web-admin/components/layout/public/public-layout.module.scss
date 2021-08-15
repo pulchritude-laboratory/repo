@@ -1,0 +1,16 @@
+.sideMenu {
+  max-width: 220px;
+}
+
+.layout {
+  padding: 5rem;
+  margin: 4rem;
+  background: aliceblue;
+  .content {
+    background: var(--color-background-lvl-0);
+    overflow-y: hidden;
+    overflow: auto;
+    padding: 3rem;
+    // width: 100%;
+  }
+}

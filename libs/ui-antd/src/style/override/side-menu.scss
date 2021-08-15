@@ -26,9 +26,11 @@ $delay-icon: 0.3s;
 }
 
 @mixin itemContentColor($color) {
+  * {
+    color: $color !important;
+  }
   .ant-menu-title-content {
     @extend %disable-text-select;
-    color: $color !important;
     font-size: 1rem;
   }
   .ant-menu-submenu-arrow {

@@ -7,3 +7,7 @@
   box-shadow: -2px 2px 3px 1px rgb(0 0 0 / 29%), 0px 2px 0px 0px rgb(0 0 0 / 12%),
     -2px 8px 5px 0px rgb(0 0 0 / 15%);
 }
+
+@mixin popoverShadow() {
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+}
