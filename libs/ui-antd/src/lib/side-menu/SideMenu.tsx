@@ -12,7 +12,7 @@ import {
   ContainerOutlined,
   MailOutlined
 } from '@ant-design/icons'
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { ReactNode } from 'react'
 import { Icon } from '@mdi/react'
 import { mdiBackburger, mdiMenu } from '@mdi/js'
@@ -40,7 +40,7 @@ const keyMaker = (item?: SideMenuItem) => item?.to ?? item?.key
 export interface SideMenuProps {
   items?: SideMenuItem[]
   footerItems?: SideMenuItem[]
-  header?: ReactNode
+  header?: (collapsed: boolean) => ReactNode
   footer?: ReactNode
 }
 
@@ -63,8 +63,6 @@ export function SideMenu(props: SideMenuProps) {
       const currentRoute = '/'
       return (
         <Menu
-          defaultSelectedKeys={defaultKey ? [defaultKey] : []}
-          // defaultOpenKeys={defaultKey ? [defaultKey] : []}
           mode="inline"
           theme="dark"
           onSelect={e => {
@@ -162,7 +160,7 @@ export function SideMenu(props: SideMenuProps) {
           {<Icon path={collapsed ? mdiMenu : mdiBackburger} />}
         </Button>
       </div>
-      <div className={$.header}>{header}</div>
+      <div className={$.header}>{header?.(collapsed)}</div>
       <div className={$.content}>{renderMenu(items)}</div>
       <div className={$.footer}>{renderMenu(footerItems)}</div>
     </Layout.Sider>

@@ -50,9 +50,18 @@ export function createTheme(seed: ThemeSeed): ThemeData {
     const contrastToWhite = chroma.contrast(base, 'white')
     const contrastToBlack = chroma.contrast(base, 'black')
 
-    let contrast = chroma('black')
     const isLightContrast = contrastToWhite > contrastToBlack - 1.5
+
+    let contrast
+    if (isLightContrast) {
+      contrast = chroma('white')
+    } else {
+      contrast = chroma('black')
+    }
+
     if (isLightContrast) contrast = chroma('white')
+
+    const whiteness = '' + 1 / contrastToWhite
 
     const colorKey = (variant: ColorVariant) => ThemeKeyMaker.color(type, variant)
 
@@ -61,8 +70,13 @@ export function createTheme(seed: ThemeSeed): ThemeData {
     theme.color?.push([colorKey('brightest'), brightest.hex()])
     theme.color?.push([colorKey('dark'), dark.hex()])
     theme.color?.push([colorKey('darkest'), darkest.hex()])
-    theme.color?.push([colorKey('contrast'), contrast.hex()])
     theme.color?.push([colorKey('tint'), tint.hex()])
+    theme.color?.push([colorKey('whiteness'), whiteness])
+    theme.color?.push([colorKey('contrast'), contrast.hex()])
+    theme.color?.push([
+      colorKey('contrast-rgb'),
+      `${contrast.rgb()[0]}, ${contrast.rgb()[1]}, ${contrast.rgb()[2]}`
+    ])
     theme.color?.push([colorKey('contrast-01'), contrast.alpha(0.1).hex()])
     theme.color?.push([colorKey('contrast-02'), contrast.alpha(0.2).hex()])
     theme.color?.push([colorKey('contrast-05'), contrast.alpha(0.5).hex()])

@@ -1,9 +1,13 @@
+@use "sass:map";
 @import './_generated';
 
-:root {
+@mixin scrollbar($color) {
+  $handle: map.get($color, 'contrast-02');
+  $track: map.get($color, 'contrast-01');
+
   * {
     scrollbar-width: thin;
-    scrollbar-color: $color-scroll-bar-handle $color-scroll-bar-track;
+    scrollbar-color: $handle $track;
   }
 
   ::-webkit-scrollbar {
@@ -12,13 +16,33 @@
   }
 
   ::-webkit-scrollbar-track {
-    background-color: $color-scroll-bar-track;
-  }
-  ::-webkit-scrollbar-corner {
-    background-color: $color-background-contrast;
+    background-color: $track;
   }
 
   ::-webkit-scrollbar-thumb {
-    background-color: $color-scroll-bar-handle;
+    background-color: $handle;
   }
 }
+
+// :root {
+//   * {
+//     scrollbar-width: thin;
+//     scrollbar-color: $color-scroll-bar-handle $color-scroll-bar-track;
+//   }
+
+//   ::-webkit-scrollbar {
+//     width: 8px;
+//     height: 8px;
+//   }
+
+//   ::-webkit-scrollbar-track {
+//     background-color: $color-scroll-bar-track;
+//   }
+//   ::-webkit-scrollbar-corner {
+//     background-color: $color-background-contrast;
+//   }
+
+//   ::-webkit-scrollbar-thumb {
+//     background-color: $color-scroll-bar-handle;
+//   }
+// }

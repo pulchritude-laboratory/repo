@@ -4,6 +4,7 @@
 @import '../_generated';
 @import '../variables';
 @import '../shadow';
+@import '../scrollbar';
 
 $side-gap: 0.5rem;
 $item-gap: 0.3rem;
@@ -62,7 +63,7 @@ $delay-icon: 0.3s;
 
 %base-layer {
   background: linear-gradient(to bottom, colorBase('base'), colorBase('dark'));
-  @include insetEdgeShadow();
+  @include insetEdgeShadow(-1);
 }
 
 %base-item {
@@ -82,14 +83,11 @@ $delay-icon: 0.3s;
   @include itemContentSize(1.2rem);
 
   &:hover {
-    background: $color-accent-contrast-02;
-  }
-  &:active {
     background: $color-accent-contrast-01;
   }
-  // &:active {
-  //   background-color: $color-background-tint !important;
-  // }
+  &:active {
+    background: $color-accent-contrast-02;
+  }
 
   &::after,
   &::before {
@@ -160,6 +158,7 @@ $delay-icon: 0.3s;
 :root {
   .ant-layout-sider {
     @extend %base-layer;
+    @include scrollbar($color-accent);
   }
 
   .ant-menu {
@@ -180,13 +179,6 @@ $delay-icon: 0.3s;
     .ant-menu-submenu-title,
     .ant-menu-item {
       @extend %base-item;
-
-      &:hover {
-        // background: $color-accent-contrast-02;
-      }
-      &:active {
-        // background: $color-accent-contrast-05;
-      }
 
       &.ant-menu-item-selected {
         @extend %selected;
@@ -232,8 +224,7 @@ $delay-icon: 0.3s;
         &.ant-menu-submenu-open {
           .ant-menu-submenu-title {
             padding-left: 0.9rem !important;
-
-            background: $color-background-contrast-02;
+            background-color: $color-accent-contrast-01;
           }
         }
       }
@@ -250,8 +241,8 @@ $delay-icon: 0.3s;
       border-radius: $border-radius-button-large 0 0 $border-radius-button-large;
 
       &.ant-menu-submenu-inline.ant-menu-submenu-open {
-        @include insetEdgeShadow(0.5);
-        background-color: colorBase('contrast-02');
+        @include insetEdgeShadow(-0.5, 0.05);
+        background-color: colorBase('contrast-01');
         padding-top: 0.25rem;
         padding-bottom: 0.25rem;
         margin-left: 0.5rem;

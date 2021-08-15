@@ -9,9 +9,11 @@ $color-primary-base-rgb: var(--wa-color-primary-base-rgb);
 $color-primary-bright: var(--wa-color-primary-bright);
 $color-primary-brightest: var(--wa-color-primary-brightest);
 $color-primary-dark: var(--wa-color-primary-dark);
+$color-primary-whiteness: var(--wa-color-primary-whiteness);
 $color-primary-darkest: var(--wa-color-primary-darkest);
 $color-primary-contrast-background: var(--wa-color-primary-contrast-background);
 $color-primary-contrast: var(--wa-color-primary-contrast);
+$color-primary-contrast-coef: var(--wa-color-primary-contrast-coef);
 $color-primary-contrast-rgb: var(--wa-color-primary-contrast-rgb);
 $color-primary-contrast-01: var(--wa-color-primary-contrast-01);
 $color-primary-contrast-02: var(--wa-color-primary-contrast-02);
@@ -24,9 +26,11 @@ $color-secondary-base-rgb: var(--wa-color-secondary-base-rgb);
 $color-secondary-bright: var(--wa-color-secondary-bright);
 $color-secondary-brightest: var(--wa-color-secondary-brightest);
 $color-secondary-dark: var(--wa-color-secondary-dark);
+$color-secondary-whiteness: var(--wa-color-secondary-whiteness);
 $color-secondary-darkest: var(--wa-color-secondary-darkest);
 $color-secondary-contrast-background: var(--wa-color-secondary-contrast-background);
 $color-secondary-contrast: var(--wa-color-secondary-contrast);
+$color-secondary-contrast-coef: var(--wa-color-secondary-contrast-coef);
 $color-secondary-contrast-rgb: var(--wa-color-secondary-contrast-rgb);
 $color-secondary-contrast-01: var(--wa-color-secondary-contrast-01);
 $color-secondary-contrast-02: var(--wa-color-secondary-contrast-02);
@@ -39,9 +43,11 @@ $color-default-base-rgb: var(--wa-color-default-base-rgb);
 $color-default-bright: var(--wa-color-default-bright);
 $color-default-brightest: var(--wa-color-default-brightest);
 $color-default-dark: var(--wa-color-default-dark);
+$color-default-whiteness: var(--wa-color-default-whiteness);
 $color-default-darkest: var(--wa-color-default-darkest);
 $color-default-contrast-background: var(--wa-color-default-contrast-background);
 $color-default-contrast: var(--wa-color-default-contrast);
+$color-default-contrast-coef: var(--wa-color-default-contrast-coef);
 $color-default-contrast-rgb: var(--wa-color-default-contrast-rgb);
 $color-default-contrast-01: var(--wa-color-default-contrast-01);
 $color-default-contrast-02: var(--wa-color-default-contrast-02);
@@ -54,9 +60,11 @@ $color-success-base-rgb: var(--wa-color-success-base-rgb);
 $color-success-bright: var(--wa-color-success-bright);
 $color-success-brightest: var(--wa-color-success-brightest);
 $color-success-dark: var(--wa-color-success-dark);
+$color-success-whiteness: var(--wa-color-success-whiteness);
 $color-success-darkest: var(--wa-color-success-darkest);
 $color-success-contrast-background: var(--wa-color-success-contrast-background);
 $color-success-contrast: var(--wa-color-success-contrast);
+$color-success-contrast-coef: var(--wa-color-success-contrast-coef);
 $color-success-contrast-rgb: var(--wa-color-success-contrast-rgb);
 $color-success-contrast-01: var(--wa-color-success-contrast-01);
 $color-success-contrast-02: var(--wa-color-success-contrast-02);
@@ -69,9 +77,11 @@ $color-warning-base-rgb: var(--wa-color-warning-base-rgb);
 $color-warning-bright: var(--wa-color-warning-bright);
 $color-warning-brightest: var(--wa-color-warning-brightest);
 $color-warning-dark: var(--wa-color-warning-dark);
+$color-warning-whiteness: var(--wa-color-warning-whiteness);
 $color-warning-darkest: var(--wa-color-warning-darkest);
 $color-warning-contrast-background: var(--wa-color-warning-contrast-background);
 $color-warning-contrast: var(--wa-color-warning-contrast);
+$color-warning-contrast-coef: var(--wa-color-warning-contrast-coef);
 $color-warning-contrast-rgb: var(--wa-color-warning-contrast-rgb);
 $color-warning-contrast-01: var(--wa-color-warning-contrast-01);
 $color-warning-contrast-02: var(--wa-color-warning-contrast-02);
@@ -84,9 +94,11 @@ $color-danger-base-rgb: var(--wa-color-danger-base-rgb);
 $color-danger-bright: var(--wa-color-danger-bright);
 $color-danger-brightest: var(--wa-color-danger-brightest);
 $color-danger-dark: var(--wa-color-danger-dark);
+$color-danger-whiteness: var(--wa-color-danger-whiteness);
 $color-danger-darkest: var(--wa-color-danger-darkest);
 $color-danger-contrast-background: var(--wa-color-danger-contrast-background);
 $color-danger-contrast: var(--wa-color-danger-contrast);
+$color-danger-contrast-coef: var(--wa-color-danger-contrast-coef);
 $color-danger-contrast-rgb: var(--wa-color-danger-contrast-rgb);
 $color-danger-contrast-01: var(--wa-color-danger-contrast-01);
 $color-danger-contrast-02: var(--wa-color-danger-contrast-02);
@@ -99,9 +111,11 @@ $color-disabled-base-rgb: var(--wa-color-disabled-base-rgb);
 $color-disabled-bright: var(--wa-color-disabled-bright);
 $color-disabled-brightest: var(--wa-color-disabled-brightest);
 $color-disabled-dark: var(--wa-color-disabled-dark);
+$color-disabled-whiteness: var(--wa-color-disabled-whiteness);
 $color-disabled-darkest: var(--wa-color-disabled-darkest);
 $color-disabled-contrast-background: var(--wa-color-disabled-contrast-background);
 $color-disabled-contrast: var(--wa-color-disabled-contrast);
+$color-disabled-contrast-coef: var(--wa-color-disabled-contrast-coef);
 $color-disabled-contrast-rgb: var(--wa-color-disabled-contrast-rgb);
 $color-disabled-contrast-01: var(--wa-color-disabled-contrast-01);
 $color-disabled-contrast-02: var(--wa-color-disabled-contrast-02);
@@ -114,9 +128,11 @@ $color-background-base-rgb: var(--wa-color-background-base-rgb);
 $color-background-bright: var(--wa-color-background-bright);
 $color-background-brightest: var(--wa-color-background-brightest);
 $color-background-dark: var(--wa-color-background-dark);
+$color-background-whiteness: var(--wa-color-background-whiteness);
 $color-background-darkest: var(--wa-color-background-darkest);
 $color-background-contrast-background: var(--wa-color-background-contrast-background);
 $color-background-contrast: var(--wa-color-background-contrast);
+$color-background-contrast-coef: var(--wa-color-background-contrast-coef);
 $color-background-contrast-rgb: var(--wa-color-background-contrast-rgb);
 $color-background-contrast-01: var(--wa-color-background-contrast-01);
 $color-background-contrast-02: var(--wa-color-background-contrast-02);
@@ -129,9 +145,11 @@ $color-accent-base-rgb: var(--wa-color-accent-base-rgb);
 $color-accent-bright: var(--wa-color-accent-bright);
 $color-accent-brightest: var(--wa-color-accent-brightest);
 $color-accent-dark: var(--wa-color-accent-dark);
+$color-accent-whiteness: var(--wa-color-accent-whiteness);
 $color-accent-darkest: var(--wa-color-accent-darkest);
 $color-accent-contrast-background: var(--wa-color-accent-contrast-background);
 $color-accent-contrast: var(--wa-color-accent-contrast);
+$color-accent-contrast-coef: var(--wa-color-accent-contrast-coef);
 $color-accent-contrast-rgb: var(--wa-color-accent-contrast-rgb);
 $color-accent-contrast-01: var(--wa-color-accent-contrast-01);
 $color-accent-contrast-02: var(--wa-color-accent-contrast-02);
@@ -147,9 +165,11 @@ $color-primary: (
   "bright": var(--wa-color-primary-bright),
   "brightest": var(--wa-color-primary-brightest),
   "dark": var(--wa-color-primary-dark),
+  "whiteness": var(--wa-color-primary-whiteness),
   "darkest": var(--wa-color-primary-darkest),
   "contrast-background": var(--wa-color-primary-contrast-background),
   "contrast": var(--wa-color-primary-contrast),
+  "contrast-coef": var(--wa-color-primary-contrast-coef),
   "contrast-rgb": var(--wa-color-primary-contrast-rgb),
   "contrast-01": var(--wa-color-primary-contrast-01),
   "contrast-02": var(--wa-color-primary-contrast-02),
@@ -164,9 +184,11 @@ $color-secondary: (
   "bright": var(--wa-color-secondary-bright),
   "brightest": var(--wa-color-secondary-brightest),
   "dark": var(--wa-color-secondary-dark),
+  "whiteness": var(--wa-color-secondary-whiteness),
   "darkest": var(--wa-color-secondary-darkest),
   "contrast-background": var(--wa-color-secondary-contrast-background),
   "contrast": var(--wa-color-secondary-contrast),
+  "contrast-coef": var(--wa-color-secondary-contrast-coef),
   "contrast-rgb": var(--wa-color-secondary-contrast-rgb),
   "contrast-01": var(--wa-color-secondary-contrast-01),
   "contrast-02": var(--wa-color-secondary-contrast-02),
@@ -181,9 +203,11 @@ $color-default: (
   "bright": var(--wa-color-default-bright),
   "brightest": var(--wa-color-default-brightest),
   "dark": var(--wa-color-default-dark),
+  "whiteness": var(--wa-color-default-whiteness),
   "darkest": var(--wa-color-default-darkest),
   "contrast-background": var(--wa-color-default-contrast-background),
   "contrast": var(--wa-color-default-contrast),
+  "contrast-coef": var(--wa-color-default-contrast-coef),
   "contrast-rgb": var(--wa-color-default-contrast-rgb),
   "contrast-01": var(--wa-color-default-contrast-01),
   "contrast-02": var(--wa-color-default-contrast-02),
@@ -198,9 +222,11 @@ $color-success: (
   "bright": var(--wa-color-success-bright),
   "brightest": var(--wa-color-success-brightest),
   "dark": var(--wa-color-success-dark),
+  "whiteness": var(--wa-color-success-whiteness),
   "darkest": var(--wa-color-success-darkest),
   "contrast-background": var(--wa-color-success-contrast-background),
   "contrast": var(--wa-color-success-contrast),
+  "contrast-coef": var(--wa-color-success-contrast-coef),
   "contrast-rgb": var(--wa-color-success-contrast-rgb),
   "contrast-01": var(--wa-color-success-contrast-01),
   "contrast-02": var(--wa-color-success-contrast-02),
@@ -215,9 +241,11 @@ $color-warning: (
   "bright": var(--wa-color-warning-bright),
   "brightest": var(--wa-color-warning-brightest),
   "dark": var(--wa-color-warning-dark),
+  "whiteness": var(--wa-color-warning-whiteness),
   "darkest": var(--wa-color-warning-darkest),
   "contrast-background": var(--wa-color-warning-contrast-background),
   "contrast": var(--wa-color-warning-contrast),
+  "contrast-coef": var(--wa-color-warning-contrast-coef),
   "contrast-rgb": var(--wa-color-warning-contrast-rgb),
   "contrast-01": var(--wa-color-warning-contrast-01),
   "contrast-02": var(--wa-color-warning-contrast-02),
@@ -232,9 +260,11 @@ $color-danger: (
   "bright": var(--wa-color-danger-bright),
   "brightest": var(--wa-color-danger-brightest),
   "dark": var(--wa-color-danger-dark),
+  "whiteness": var(--wa-color-danger-whiteness),
   "darkest": var(--wa-color-danger-darkest),
   "contrast-background": var(--wa-color-danger-contrast-background),
   "contrast": var(--wa-color-danger-contrast),
+  "contrast-coef": var(--wa-color-danger-contrast-coef),
   "contrast-rgb": var(--wa-color-danger-contrast-rgb),
   "contrast-01": var(--wa-color-danger-contrast-01),
   "contrast-02": var(--wa-color-danger-contrast-02),
@@ -249,9 +279,11 @@ $color-disabled: (
   "bright": var(--wa-color-disabled-bright),
   "brightest": var(--wa-color-disabled-brightest),
   "dark": var(--wa-color-disabled-dark),
+  "whiteness": var(--wa-color-disabled-whiteness),
   "darkest": var(--wa-color-disabled-darkest),
   "contrast-background": var(--wa-color-disabled-contrast-background),
   "contrast": var(--wa-color-disabled-contrast),
+  "contrast-coef": var(--wa-color-disabled-contrast-coef),
   "contrast-rgb": var(--wa-color-disabled-contrast-rgb),
   "contrast-01": var(--wa-color-disabled-contrast-01),
   "contrast-02": var(--wa-color-disabled-contrast-02),
@@ -266,9 +298,11 @@ $color-background: (
   "bright": var(--wa-color-background-bright),
   "brightest": var(--wa-color-background-brightest),
   "dark": var(--wa-color-background-dark),
+  "whiteness": var(--wa-color-background-whiteness),
   "darkest": var(--wa-color-background-darkest),
   "contrast-background": var(--wa-color-background-contrast-background),
   "contrast": var(--wa-color-background-contrast),
+  "contrast-coef": var(--wa-color-background-contrast-coef),
   "contrast-rgb": var(--wa-color-background-contrast-rgb),
   "contrast-01": var(--wa-color-background-contrast-01),
   "contrast-02": var(--wa-color-background-contrast-02),
@@ -283,9 +317,11 @@ $color-accent: (
   "bright": var(--wa-color-accent-bright),
   "brightest": var(--wa-color-accent-brightest),
   "dark": var(--wa-color-accent-dark),
+  "whiteness": var(--wa-color-accent-whiteness),
   "darkest": var(--wa-color-accent-darkest),
   "contrast-background": var(--wa-color-accent-contrast-background),
   "contrast": var(--wa-color-accent-contrast),
+  "contrast-coef": var(--wa-color-accent-contrast-coef),
   "contrast-rgb": var(--wa-color-accent-contrast-rgb),
   "contrast-01": var(--wa-color-accent-contrast-01),
   "contrast-02": var(--wa-color-accent-contrast-02),

@@ -1,8 +1,11 @@
 @import '../../style/_generated';
 @import '../../style/variables';
+@import '../../style/scrollbar';
 @import '../../style/extends';
 
 .background {
+  @include scrollbar($color-background);
+
   background-color: $color-background-base;
   transition: background-color $time-bg-color;
 

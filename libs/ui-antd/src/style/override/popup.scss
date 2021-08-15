@@ -1,0 +1,48 @@
+@import '../_generated';
+
+@mixin menuPopup() {
+  $border-radius: $border-radius-button-large;
+  $border-radius-all: 0.8rem $border-radius $border-radius $border-radius;
+  &:global(.ant-menu-submenu-popup) {
+    &::before {
+      content: '';
+      $size: 10px;
+      display: block;
+      background-color: $color-accent-base;
+      background-color: transparent;
+      position: absolute;
+      left: -4px;
+      height: $size;
+      width: $size;
+      opacity: 1;
+      transition: all $time-02 ease-out;
+      top: 16px;
+      transform: rotate(45deg);
+    }
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+
+    background-color: $color-accent-base;
+    border-radius: $border-radius-all;
+
+    :global(.ant-menu-sub) {
+      background: $color-accent-base !important;
+      // background: $color-background-contrast-01 !important;
+      // background: $color-background-contrast-01 !important;
+      border-radius: $border-radius-all;
+      box-shadow: none;
+      :global(.ant-menu-item) {
+        margin: 0.3rem;
+        width: calc(100% - 0.6rem) !important;
+        border-radius: $border-radius-button;
+        &:global(.ant-menu-item-selected) {
+          box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+        }
+        // background-color: $color-accent-brightest;
+        &::before,
+        &::after {
+          all: unset;
+        }
+      }
+    }
+  }
+}

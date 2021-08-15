@@ -1,27 +1,10 @@
 @import '../../style/_generated';
 @import '../../style/variables';
 @import '../../style/shadow';
+@import '../../style/override/popup';
 
 .popup {
-  // :root {
-  &:global(.ant-menu-submenu-popup) {
-    //  .ant-menu-submenu-popup {
-    // background: red !important;
-    // $shadow-color:
-
-    overflow: hidden;
-    border-radius: 0.5rem;
-    border: 1px solid var(--th-color-border-dominant);
-    // box-shadow: 0 3px 6px -4px #00ff40a6, 0 6px 16px 0 #fbff0049, 0 9px 28px 8px #0099ff34;
-    box-shadow: var(--th-shadow-dominant);
-
-    // :global(.ant-menu-sub) {
-    //   background: rgb(22, 22, 22) !important;
-    //   :global(.ant-menu-item) {
-    //     background: transparent;
-    //   }
-    // }
-  }
+  @include menuPopup();
 }
 .wrapper {
   background-color: transparent;
@@ -108,8 +91,10 @@
     $shadow-color: $color-background-half-contrast;
   }
 
+  $edge-color: $color-accent-contrast-02;
+
   .header {
-    border-bottom: 1px solid $color-accent-brightest;
+    box-shadow: 0px 1px 0px 0px $edge-color;
     padding-top: 1rem;
     padding-bottom: 1rem;
     width: 100%;
@@ -117,8 +102,7 @@
 
   .footer {
     overflow: hidden;
-
-    border-top: 1px solid $color-accent-brightest;
+    box-shadow: 0px -1px 0px 0px $edge-color;
     padding-top: 1rem;
     padding-bottom: 2rem;
   }

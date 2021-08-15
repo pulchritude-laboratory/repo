@@ -17,6 +17,7 @@
     $height-footer: 5rem;
     .header {
       height: $height-header;
+      min-width: 20px;
       // background: rgb(22, 211, 211);
       .logo {
         color: red;

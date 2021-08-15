@@ -17,6 +17,7 @@ import {
   mdiScriptTextPlay,
   mdiViewDashboard
 } from '@mdi/js'
+import { Logo } from './logo/Logo'
 
 export interface LayoutProps {
   children?: ReactNode
@@ -121,11 +122,15 @@ export function Layout(props: LayoutProps) {
     <div className={$.layout}>
       <span className={$.side}>
         <SideMenu
-          header={
-            <div className={$.header}>
-              <div className={$.logo}>LOGO</div>
-            </div>
-          }
+          header={collapsed => {
+            return (
+              <div className={$.header}>
+                <div className={$.logo}>
+                  <Logo mode={collapsed ? 'compact' : 'full'} />
+                </div>
+              </div>
+            )
+          }}
           items={menuItems}
           footerItems={footerItems}
           footer={<div className={$.footer}>FOOT</div>}
