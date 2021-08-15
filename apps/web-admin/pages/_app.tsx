@@ -9,8 +9,23 @@ import '../themes/scrollbar.scss'
 
 import Layout from '../components/layout/layout'
 import { Background } from '@repo/ui-antd'
+import { useEffect } from 'react'
+import { createTheme, updateThemeCssVariables } from '@repo/utils/theme-maker'
 
 function CustomApp({ Component, pageProps }: AppProps) {
+  useEffect(() => {
+    updateThemeCssVariables(
+      createTheme({
+        prefix: 'wa',
+        primary: '#058d64',
+        background: '#ffffff',
+        // background: '#777',
+        accent: '#058d64',
+        borderRadius: 0.6
+      })
+    )
+  }, [])
+
   return (
     <div className="app">
       <Background>

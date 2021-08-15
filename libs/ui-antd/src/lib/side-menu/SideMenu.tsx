@@ -1,4 +1,7 @@
-import { Button, Layout, Menu } from 'antd'
+import { Button, Layout, Menu, MenuItemProps } from 'antd'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+
 import $ from './SideMenu.module.scss'
 import {
   AppstoreOutlined,
@@ -9,7 +12,7 @@ import {
   ContainerOutlined,
   MailOutlined
 } from '@ant-design/icons'
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import { ReactNode } from 'react'
 import { Icon } from '@mdi/react'
 import { mdiBackburger, mdiMenu } from '@mdi/js'
@@ -22,28 +25,119 @@ import cn from 'classnames'
 const { SubMenu } = Menu
 
 export interface SideMenuItem {
+  type?: 'page' | 'action'
   key?: string
-  to?: string
+  to?: `/${string}`
+  onClick?: MenuItemProps['onClick']
   label?: ReactNode
   icon?: ReactNode
   subItems?: Omit<SideMenuItem, 'subItems'>[]
 }
 
+const keyMaker = (item?: SideMenuItem) => item?.to ?? item?.key
+
 /* eslint-disable-next-line */
 export interface SideMenuProps {
   items?: SideMenuItem[]
+  footerItems?: SideMenuItem[]
   header?: ReactNode
   footer?: ReactNode
 }
 
 export function SideMenu(props: SideMenuProps) {
-  const { header, items, footer } = props
+  const { header, items, footerItems, footer } = props
   const [collapsed, setCollapsed] = useState(false)
+  const router = useRouter()
+  console.log({ router })
+
+  const [selectedKey, setSelectedKey] = useState(router.pathname ?? keyMaker(items?.[0]))
 
   const breakpoints = useBreakpoint()
 
+  const defaultKey = keyMaker(items?.[0])
   const skinnyViewport = breakpoints.xs
   console.log('BBRR', breakpoints)
+
+  const renderMenu = useCallback(
+    (menuItems?: SideMenuItem[]) => {
+      const currentRoute = '/'
+      return (
+        <Menu
+          defaultSelectedKeys={defaultKey ? [defaultKey] : []}
+          // defaultOpenKeys={defaultKey ? [defaultKey] : []}
+          mode="inline"
+          theme="dark"
+          onSelect={e => {
+            const actionKeys = menuItems?.reduce<string[]>((acc, mi) => {
+              if (mi.type === 'action') {
+                const key = keyMaker(mi)
+                key && acc.push(key)
+              }
+              if (mi.subItems) {
+                mi.subItems.forEach(si => {
+                  if (si.type === 'action') {
+                    const key = keyMaker(si)
+                    key && acc.push(key)
+                  }
+                })
+              }
+              return acc
+            }, [])
+            if (!actionKeys?.includes(e.key)) {
+              setSelectedKey(e.key)
+            }
+          }}
+          selectedKeys={selectedKey ? [selectedKey] : []}
+        >
+          {menuItems?.map(item => {
+            const content = (it?: SideMenuItem) => {
+              return it?.to ? (
+                <Link href={it?.to ?? currentRoute}>
+                  <div>{it.label}</div>
+                </Link>
+              ) : (
+                it?.label ?? '???'
+              )
+            }
+            console.log('EDDD', content(item))
+
+            if (item.subItems) {
+              return (
+                <SubMenu
+                  key={item.to ?? item.key}
+                  title={item.label}
+                  icon={item.icon}
+                  popupClassName={$.popup}
+                >
+                  {item.subItems.map(subItem => (
+                    <Menu.Item key={subItem.to ?? subItem.key} icon={subItem.icon}>
+                      <Link href={subItem?.to ?? currentRoute}>
+                        <div>{subItem.label}</div>
+                      </Link>
+                    </Menu.Item>
+                  ))}
+                </SubMenu>
+              )
+            }
+
+            return (
+              <Menu.Item
+                key={item.to ?? item.key}
+                icon={item.icon}
+                onClick={e => {
+                  item.onClick?.(e)
+                  collapsed && item?.to && router.push(item.to)
+                }}
+              >
+                {content(item)}
+              </Menu.Item>
+            )
+          })}
+        </Menu>
+      )
+    },
+    [collapsed, selectedKey]
+  )
 
   return (
     <Layout.Sider
@@ -69,58 +163,8 @@ export function SideMenu(props: SideMenuProps) {
         </Button>
       </div>
       <div className={$.header}>{header}</div>
-      <div className={$.content}>
-        <Menu
-          defaultSelectedKeys={['1']}
-          defaultOpenKeys={['sub1']}
-          mode="inline"
-          theme="dark"
-          // inlineCollapsed={true}
-        >
-          {items?.map(item => {
-            if (item.subItems) {
-              return (
-                <SubMenu
-                  key={item.to ?? item.key}
-                  title={item.label}
-                  icon={item.icon}
-                  popupClassName={$.popup}
-                >
-                  {item.subItems.map(subItem => (
-                    <Menu.Item key={subItem.to ?? subItem.key} icon={subItem.icon}>
-                      {subItem.label}
-                    </Menu.Item>
-                  ))}
-                </SubMenu>
-              )
-            }
-
-            return (
-              <Menu.Item key={item.to ?? item.key} icon={item.icon}>
-                {item.label}
-              </Menu.Item>
-            )
-          })}
-        </Menu>
-      </div>
-
-      <div className={$.footer}>
-        {/* <Menu
-          defaultSelectedKeys={['1']}
-          defaultOpenKeys={['sub2']}
-          mode="inline"
-          theme="dark"
-          // inlineCollapsed={true}
-        >
-          <Menu.Item key="12" icon={<AiOutlineMenu />}>
-            FOP 1
-          </Menu.Item>
-          <Menu.Item key="32" icon={<MdAlarm />}>
-            FOP 2
-          </Menu.Item>
-        </Menu> */}
-        {footer}
-      </div>
+      <div className={$.content}>{renderMenu(items)}</div>
+      <div className={$.footer}>{renderMenu(footerItems)}</div>
     </Layout.Sider>
   )
 }

@@ -1,6 +1,7 @@
 @use "sass:map";
 
 @import './../extends.scss';
+@import '../_generated';
 @import '../variables';
 @import '../shadow';
 
@@ -60,7 +61,7 @@ $delay-icon: 0.3s;
 }
 
 %base-layer {
-  background: linear-gradient(to bottom, colorBase('bright'), colorBase('dark'));
+  background: linear-gradient(to bottom, colorBase('base'), colorBase('dark'));
   @include insetEdgeShadow();
 }
 
@@ -80,42 +81,37 @@ $delay-icon: 0.3s;
   @include itemContentColor(colorBase('contrast'));
   @include itemContentSize(1.2rem);
 
-  // transition: padding ;
+  &:hover {
+    background: $color-accent-contrast-02;
+  }
+  &:active {
+    background: $color-accent-contrast-01;
+  }
+  // &:active {
+  //   background-color: $color-background-tint !important;
+  // }
 
+  &::after,
   &::before {
     content: '';
     position: absolute;
     z-index: 100;
-    top: -16px;
     right: -40px;
     height: 16px;
     width: 9px;
-
     opacity: 0;
-
+    background-color: transparent;
+    transition: all $time-02 ease-out;
+  }
+  &::before {
+    top: -16px;
     border-radius: 100% 0 100% 0/0 0 100% 100%;
-    background: transparent;
     box-shadow: 1px 4px 0 0 $color-background-base;
-
-    transition: all 0.2s ease-out;
   }
   &::after {
-    content: '';
-    position: absolute;
-    z-index: 100;
-    bottom: 16px;
-
-    right: -40px;
-    height: 16px;
-    width: 9px;
     top: calc(#{$item-height} - 0.1px);
-
-    opacity: 0;
-
     border-radius: 0 100% 0 0/0 100% 0 100%;
-    background: transparent;
     box-shadow: 1px -4px 0 0 $color-background-base;
-    transition: all 0.2s ease-out;
   }
 }
 
@@ -186,7 +182,10 @@ $delay-icon: 0.3s;
       @extend %base-item;
 
       &:hover {
-        background: $color-background-contrast-02;
+        // background: $color-accent-contrast-02;
+      }
+      &:active {
+        // background: $color-accent-contrast-05;
       }
 
       &.ant-menu-item-selected {
@@ -198,7 +197,6 @@ $delay-icon: 0.3s;
         &:not(.ant-menu-submenu-open) {
           .ant-menu-submenu-title {
             @extend %selected;
-            // padding-left: 1rem !important;
           }
         }
       }
@@ -209,9 +207,6 @@ $delay-icon: 0.3s;
       }
       .ant-menu-item {
         padding-left: 2rem !important;
-      }
-      .ant-menu-submenu-title {
-        // padding-left: 1rem !important;
       }
     }
 
@@ -229,18 +224,15 @@ $delay-icon: 0.3s;
     }
     &.ant-menu-inline-collapsed {
       .ant-menu-submenu {
-        // background-color: $color-background-base !important;
-
-        // padding: 0px;
         .ant-menu-submenu-title {
           @include itemContentSize(1.7rem);
           padding-left: 1rem;
           padding-top: 0.4rem;
         }
         &.ant-menu-submenu-open {
-          // padding-left: 1rem;
-
           .ant-menu-submenu-title {
+            padding-left: 0.9rem !important;
+
             background: $color-background-contrast-02;
           }
         }
@@ -253,17 +245,12 @@ $delay-icon: 0.3s;
     }
 
     .ant-menu-submenu {
-      transition: all 0.2s;
+      transition: all $time-02;
       padding-top: 0.001rem;
       border-radius: $border-radius-button-large 0 0 $border-radius-button-large;
 
-      // .ant-menu-submenu-title {
-      //   @include itemContentSize(1.7rem);
-      //   padding-left: 1rem;
-      //   padding-top: 0.45rem;
-      // }
       &.ant-menu-submenu-inline.ant-menu-submenu-open {
-        @include insetEdgeShadow();
+        @include insetEdgeShadow(0.5);
         background-color: colorBase('contrast-02');
         padding-top: 0.25rem;
         padding-bottom: 0.25rem;

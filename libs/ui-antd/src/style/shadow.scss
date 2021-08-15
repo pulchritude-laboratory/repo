@@ -1,5 +1,5 @@
-@mixin insetEdgeShadow() {
-  box-shadow: inset -7px 0px 9px -7px rgb(0 0 0 / 70%);
+@mixin insetEdgeShadow($c: 1) {
+  box-shadow: inset calc(-7px * #{$c}) 0px 9px -7px rgb(0 0 0 / 70%);
 }
 
 @mixin outsetEdgeShadow() {

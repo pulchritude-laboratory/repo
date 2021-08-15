@@ -13,7 +13,7 @@ import {
 } from './theme'
 
 export function createTheme(seed: ThemeSeed): ThemeData {
-  const theme: ThemeData = { prefix: seed.prefix, color: [], shadow: [] }
+  const theme: ThemeData = { prefix: seed.prefix, color: [], shadow: [], time: [] }
 
   // const see
 
@@ -51,8 +51,8 @@ export function createTheme(seed: ThemeSeed): ThemeData {
     const contrastToBlack = chroma.contrast(base, 'black')
 
     let contrast = chroma('black')
-    const lightContrast = contrastToWhite > contrastToBlack - 1.5
-    if (lightContrast) contrast = chroma('white')
+    const isLightContrast = contrastToWhite > contrastToBlack - 1.5
+    if (isLightContrast) contrast = chroma('white')
 
     const colorKey = (variant: ColorVariant) => ThemeKeyMaker.color(type, variant)
 
@@ -63,12 +63,18 @@ export function createTheme(seed: ThemeSeed): ThemeData {
     theme.color?.push([colorKey('darkest'), darkest.hex()])
     theme.color?.push([colorKey('contrast'), contrast.hex()])
     theme.color?.push([colorKey('tint'), tint.hex()])
+    theme.color?.push([colorKey('contrast-01'), contrast.alpha(0.1).hex()])
     theme.color?.push([colorKey('contrast-02'), contrast.alpha(0.2).hex()])
     theme.color?.push([colorKey('contrast-05'), contrast.alpha(0.5).hex()])
-    if (lightContrast) {
+    if (isLightContrast) {
       theme.color?.push([colorKey('half-contrast'), contrast.alpha(0.4).hex()])
     } else {
       theme.color?.push([colorKey('half-contrast'), contrast.alpha(0.4).hex()])
+    }
+    if ((isDark && !isLightContrast) || (!isDark && isLightContrast)) {
+      theme.color?.push([colorKey('contrast-background'), base.hex()])
+    } else {
+      theme.color?.push([colorKey('contrast-background'), contrast.hex()])
     }
   }
 
@@ -98,11 +104,11 @@ export function createTheme(seed: ThemeSeed): ThemeData {
     theme.color?.push([colorKey('card'), reference * 2 + 'rem'])
   }
 
-  const delaySpeedMaker = () => {
+  const timeMaker = () => {
     const baseline = 1
 
-    ThemeVariableSegments.delayDurations.forEach(s =>
-      theme.color?.push([ThemeKeyMaker.delayDuration(s), `${s * 100 * baseline}ms`])
+    ThemeVariableSegments.time.forEach(s =>
+      theme.time?.push([ThemeKeyMaker.time(s), `${Number(s) * 100 * baseline}ms`])
     )
   }
 
@@ -175,7 +181,7 @@ export function createTheme(seed: ThemeSeed): ThemeData {
 
   shadowMaker()
 
-  delaySpeedMaker()
+  timeMaker()
 
   scrollBarStyle()
 
@@ -193,7 +199,9 @@ export function createPalette(scaleItems: string[], steps = 15): HEXAColor[] {
 }
 
 export function updateThemeCssVariables(theme: ThemeData) {
-  const { prefix, color, shadow } = theme
+  const { prefix, color, shadow, time } = theme
+
+  console.log('TTHG', theme)
 
   const root = document.documentElement
 
@@ -203,4 +211,5 @@ export function updateThemeCssVariables(theme: ThemeData) {
 
   color?.forEach(([k, v]) => root.style.setProperty(appendPrefix(k), v))
   shadow?.forEach(([k, v]) => root.style.setProperty(appendPrefix(k), v))
+  time?.forEach(([k, v]) => root.style.setProperty(appendPrefix(k), v))
 }

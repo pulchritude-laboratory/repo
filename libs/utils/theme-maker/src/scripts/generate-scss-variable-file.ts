@@ -8,7 +8,7 @@ const {
   colorVariants,
   shadowTypes,
   borderTypes,
-  delayDurations,
+  time: delayDurations,
   scrollBarParts
 } = ThemeVariableSegments
 
@@ -30,7 +30,7 @@ export function generateScssVariableFile(externalConfig: ExternalConfig) {
       borderRadius: r => `$border-radius-${r}`,
       shadow: t => `$shadow-${t}`,
       lightAngle: () => `$light-angle`,
-      delayDuration: d => `$delay-duration-${d}`,
+      time: t => `$time-${t}`,
       scrollBarColor: p => `$color-scroll-bar-${p}`
     }
   }
@@ -97,7 +97,7 @@ export function generateScssVariableFile(externalConfig: ExternalConfig) {
 
   content += '\n'
   delayDurations.forEach(d => {
-    content += makeLine(config.parsers.delayDuration(d), ThemeKeyMaker.delayDuration(d))
+    content += makeLine(config.parsers.time(d), ThemeKeyMaker.time(d))
   })
 
   content += '\n'

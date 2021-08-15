@@ -37,7 +37,13 @@ export interface ThemeSwitcherProps {}
 export function ThemeSwitcher(props: ThemeSwitcherProps) {
   // const { setTheme, fabricateTheme, createColorPalette } = useTheme()
 
-  const [themeSeed, setThemeSeed] = useState<ThemeSeed>({ prefix: 'wa' })
+  const [themeSeed, setThemeSeed] = useState<ThemeSeed>({
+    prefix: 'wa'
+    // primary: '#058d64',
+    // background: '#ffffff',
+    // accent: '#058d64',
+    // borderRadius: 0.6
+  })
 
   useEffect(() => {
     const theme = createTheme(themeSeed)

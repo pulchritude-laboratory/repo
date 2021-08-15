@@ -17,10 +17,12 @@ export const ThemeVariableSegments = {
     'brightest',
     'dark',
     'darkest',
+    'contrast-background',
     'contrast',
     'contrast-rgb',
-    'contrast-05',
+    'contrast-01',
     'contrast-02',
+    'contrast-05',
     'half-contrast',
     'tint'
   ],
@@ -28,7 +30,7 @@ export const ThemeVariableSegments = {
   components: ['card', 'button', 'button-large', 'input'],
   shadowTypes: ['bg-500', 'bg-600', 'button-primary', 'button-secondary', 'button-default'],
   borderTypes: ['dominant'],
-  delayDurations: [2, 5, 10, 15, 20],
+  time: ['02', '05', '10', '15', '20'],
   scrollBarParts: ['track', 'handle']
 } as const
 
@@ -38,7 +40,7 @@ export type Steps = typeof ThemeVariableSegments.steps[number]
 export type ShadowType = typeof ThemeVariableSegments.shadowTypes[number]
 export type BorderType = typeof ThemeVariableSegments.borderTypes[number]
 export type ComponentType = typeof ThemeVariableSegments.components[number]
-export type DelayDuration = typeof ThemeVariableSegments.delayDurations[number]
+export type Time = typeof ThemeVariableSegments.time[number]
 export type ScrollBarParts = typeof ThemeVariableSegments.scrollBarParts[number]
 
 export const ThemeKeyMaker = {
@@ -48,7 +50,7 @@ export const ThemeKeyMaker = {
   borderRadius: (type: ComponentType) => `--border-color-${type}`,
   lightAngle: () => `--light-angle`,
   shadow: (type: ShadowType) => `--shadow-${type}`,
-  delayDuration: (type: DelayDuration) => `--delay-duration-${type}`,
+  time: (time: Time) => `--time-${time}`,
   scrollBarColor: (part: ScrollBarParts) => `--color-scroll-bar-${part}`
 }
 
@@ -60,7 +62,7 @@ export type CssVariable = [string, string]
 
 export interface ThemeData {
   prefix?: string
-  delay?: CssVariable[]
+  time?: CssVariable[]
   color?: CssVariable[]
   borderRadius?: CssVariable[]
   shadow?: CssVariable[]

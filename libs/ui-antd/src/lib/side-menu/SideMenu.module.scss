@@ -1,3 +1,4 @@
+@import '../../style/_generated';
 @import '../../style/variables';
 @import '../../style/shadow';
 
@@ -14,15 +15,12 @@
     // box-shadow: 0 3px 6px -4px #00ff40a6, 0 6px 16px 0 #fbff0049, 0 9px 28px 8px #0099ff34;
     box-shadow: var(--th-shadow-dominant);
 
-    :global(.ant-menu-sub) {
-      // border-radius: 0.5rem;
-
-      // background: var(--color-background-lvl-1) !important;
-      background: rgb(22, 22, 22) !important;
-      :global(.ant-menu-item) {
-        background: transparent;
-      }
-    }
+    // :global(.ant-menu-sub) {
+    //   background: rgb(22, 22, 22) !important;
+    //   :global(.ant-menu-item) {
+    //     background: transparent;
+    //   }
+    // }
   }
 }
 .wrapper {
@@ -40,12 +38,9 @@
     position: absolute;
     right: calc(#{$wrap-size} * -0.5);
     top: calc(#{$wrap-size} * 0.2);
-    // box-shadow: 0 1px 12px rgba(0, 0, 0, 0.397);
-
-    // background-color: orange;
     height: $wrap-size;
     width: $wrap-size;
-    transition: right $delay-duration-2 ease-out !important;
+    transition: right $time-02 ease-out !important;
 
     &::after {
       content: '';
@@ -55,18 +50,13 @@
       height: calc(#{$radius} * 2);
       top: calc(#{$inner-offset} + (#{$shrink}));
       left: calc(#{$inner-offset} + (#{$shrink}));
-      // background-color: red;
-      // z-index: 232;
       position: absolute;
       border-radius: calc(#{$size} * 0.5) 0 0 calc(#{$size} * 0.5);
-      // z-index: 1;
-      // box-shadow: 0 1px 12px rgba(0, 0, 0, 0.397);
       @include outsetEdgeShadow();
     }
     .toggle {
       position: absolute;
 
-      // $size: 2rem;
       top: $inner-offset;
 
       right: $inner-offset;
@@ -77,19 +67,14 @@
       z-index: 100;
       border-radius: 50%;
       border-width: 0px;
-      border-color: $color-accent-brightest;
-      // border-color: transparent;
+      border-color: $color-accent-base;
       box-shadow: none;
 
       background-color: $color-background-base;
-      // background-color: transparent;
       color: $color-background-contrast;
-      transition: right $delay-duration-2 !important;
-      // transition: unset !important;
+      transition: background-color $time-bg-color, color $time-bg-color, right $time-02 !important;
       z-index: 2;
-      // box-shadow: 0 1px 12px rgba(0, 0, 0, 0.397);
       &.offsetLeft {
-        // background: red;
         right: -1.8rem;
       }
       &:hover {
@@ -98,22 +83,11 @@
         height: 100%;
         width: 100%;
         padding: calc(#{$size} * 0.15);
-        transition: padding $delay-duration-2;
+        transition: padding $time-02;
       }
-      // &::after {
-      //   content: '';
-      //   width: 30px;
-      //   height: 30px;
-      //   background-color: red;
-
-      //   position: absolute;
-      //   right: 15px;
-      //   z-index: 1;
-      // }
     }
 
     &.offsetLeft {
-      // background: red;
       right: calc(#{$wrap-size} * -1.2);
       &::after {
         opacity: 0;
@@ -132,35 +106,20 @@
 
     $color: $color-background-base;
     $shadow-color: $color-background-half-contrast;
-    // // $shadow-color: $color-primary-dark;
-    // background:
-    // /* Shadow covers */ linear-gradient($color 30%, rgba(255, 255, 255, 0)),
-    //   linear-gradient(rgba(255, 255, 255, 0), $color 70%) 0 100%,
-    //   /* Shadows */ radial-gradient(50% 0, farthest-side, $shadow-color, rgba(0, 0, 0, 0)),
-    //   radial-gradient(50% 100%, farthest-side, $shadow-color, rgba(0, 0, 0, 0)) 0 100%;
-    // background:
-    // /* Shadow covers */ linear-gradient($color 30%, rgba(255, 255, 255, 0)),
-    //   linear-gradient(rgba(255, 255, 255, 0), $color 70%) 0 100%,
-    //   /* Shadows */ radial-gradient(farthest-side at 50% 0, $shadow-color, rgba(0, 0, 0, 0)),
-    //   radial-gradient(farthest-side at 50% 100%, $shadow-color, rgba(0, 0, 0, 0)) 0 100%;
-    // background-repeat: no-repeat;
-    // // background-color: red;
-    // background-size: 100% 40px, 100% 40px, 100% 14px, 100% 14px;
-    // background-attachment: local, local, scroll, scroll;
-    // transition: background 2s;
   }
 
   .header {
-    border-bottom: 1px solid $color-background-darkest;
+    border-bottom: 1px solid $color-accent-brightest;
     padding-top: 1rem;
     padding-bottom: 1rem;
     width: 100%;
   }
 
   .footer {
-    border-top: 1px solid $color-background-darkest;
+    overflow: hidden;
+
+    border-top: 1px solid $color-accent-brightest;
     padding-top: 1rem;
-    padding-bottom: 1rem;
-    width: 100%;
+    padding-bottom: 2rem;
   }
 }

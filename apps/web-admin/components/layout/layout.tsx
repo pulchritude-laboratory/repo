@@ -4,12 +4,15 @@ import { ReactNode, useMemo } from 'react'
 import { FaLightbulb } from 'react-icons/fa'
 import Icon from '@mdi/react'
 import {
+  mdiAccountCircle,
   mdiAccountGroup,
   mdiBell,
   mdiCardAccountDetails,
+  mdiCog,
   mdiConsole,
   mdiLightbulb,
   mdiLightbulbGroup,
+  mdiLogout,
   mdiMedicalBag,
   mdiScriptTextPlay,
   mdiViewDashboard
@@ -30,20 +33,20 @@ export function Layout(props: LayoutProps) {
         icon: <Icon path={mdiViewDashboard} />
       },
       {
-        to: '/device',
+        key: '/devices',
         label: t('menu.device'),
         icon: <Icon path={mdiLightbulb} />,
         subItems: [
           {
-            to: 'device/devices',
+            to: '/devices/devices',
             label: t('menu.devices')
           },
           {
-            to: 'device/device-types',
+            to: '/devices/device-types',
             label: t('menu.device-types')
           },
           {
-            to: 'device/device-groups',
+            to: '/devices/device-groups',
             label: t('menu.device-groups')
           }
         ]
@@ -64,17 +67,17 @@ export function Layout(props: LayoutProps) {
         icon: <Icon path={mdiConsole} />,
         subItems: [
           {
-            to: '/commands',
+            to: '/commands/commands',
             label: t('menu.commands')
           },
           {
-            to: '/recurring-commands',
+            to: '/commands/recurring-commands',
             label: t('menu.recurring-commands')
           }
         ]
       },
       {
-        to: '/maintenance',
+        to: '/maintenances',
         label: t('menu.maintenance'),
         icon: <Icon path={mdiMedicalBag} />
       },
@@ -92,6 +95,28 @@ export function Layout(props: LayoutProps) {
     return items
   }, [])
 
+  const footerItems = useMemo(() => {
+    const items: SideMenuProps['items'] = [
+      {
+        to: '/account',
+        label: t('menu.account'),
+        icon: <Icon path={mdiAccountCircle} />
+      },
+      {
+        to: '/settings',
+        label: t('menu.settings'),
+        icon: <Icon path={mdiCog} />
+      },
+      {
+        key: 'sign-out',
+        type: 'action',
+        label: t('menu.sign-out'),
+        icon: <Icon path={mdiLogout} />
+      }
+    ]
+    return items
+  }, [])
+
   return (
     <div className={$.layout}>
       <span className={$.side}>
@@ -102,6 +127,7 @@ export function Layout(props: LayoutProps) {
             </div>
           }
           items={menuItems}
+          footerItems={footerItems}
           footer={<div className={$.footer}>FOOT</div>}
         />
       </span>
