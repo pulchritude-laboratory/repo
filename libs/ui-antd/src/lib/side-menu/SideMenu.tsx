@@ -88,7 +88,6 @@ export function SideMenu(props: SideMenuProps) {
                 it?.label ?? '???'
               )
             }
-            console.log('EDDD', content(item))
 
             if (item.subItems) {
               return (

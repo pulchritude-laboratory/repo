@@ -22,6 +22,8 @@ interface Config {
 }
 
 export function generateScssVariableFile(externalConfig: ExternalConfig) {
+  console.log('CONFIG', externalConfig)
+
   const config: Config = {
     parsers: {
       color: (t, v) => `$color-${t}-${v}`,
@@ -39,14 +41,14 @@ export function generateScssVariableFile(externalConfig: ExternalConfig) {
     `${k}: var(${v.replace('--', externalConfig.prefix ? `--${externalConfig.prefix}-` : '--')});\n`
 
   const makePropLine = (k: string, v: string) =>
-    `  "${k}": var(${v.replace(
+    `  '${k}': var(${v.replace(
       '--',
       externalConfig.prefix ? `--${externalConfig.prefix}-` : '--'
     )}),\n`
 
   let content = '// generated file\n'
 
-  content += '\n@use "sass:map";\n'
+  content += `\n@use 'sass:map';\n`
 
   content +=
     '\n$color-types:' +
@@ -66,7 +68,7 @@ export function generateScssVariableFile(externalConfig: ExternalConfig) {
   content += '\n'
   colorTypes.forEach(type => {
     content += `$color-${type}: (\n`
-    content += `  "type": ${type},\n`
+    content += `  'type': ${type},\n`
 
     colorVariants.forEach(variant => {
       content += makePropLine(variant, ThemeKeyMaker.color(type, variant))
@@ -112,3 +114,14 @@ export function generateScssVariableFile(externalConfig: ExternalConfig) {
     fs.writeFileSync(externalConfig.output, content)
   }
 }
+
+const params = process.argv.slice(2)
+
+const keys: (keyof ExternalConfig)[] = ['output', 'prefix']
+
+const parsedParams = keys.reduce<ExternalConfig>((acc, k) => {
+  acc[k] = params.find(p => p.startsWith(`--${k}`))?.split('=')[1]
+  return acc
+}, {})
+
+generateScssVariableFile(parsedParams)

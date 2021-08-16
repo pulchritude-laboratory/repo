@@ -4,7 +4,10 @@
   "license": "MIT",
   "scripts": {
     "wa": "nx serve web-admin",
+    "wa:prod": "nx serve web-admin --prod",
+    "wa:build": "nx build web-admin",
     "wa:scss": "ts-node --project=./tsconfig.script.json ./libs/ui-antd/scripts/generate-theme-files.ts",
+    "ant:gen:style": "ts-node --project=./tsconfig.script.json ./libs/utils/theme-maker/src/scripts/generate-scss-variable-file.ts --output=./libs/ui-antd/src/style/_generated.scss --prefix=wa",
     "nx": "nx",
     "start": "nx serve",
     "build": "nx build",
