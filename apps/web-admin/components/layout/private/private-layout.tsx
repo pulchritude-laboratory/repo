@@ -1,7 +1,5 @@
-import $ from './private-layout.module.scss'
-import { SideMenu, SideMenuItem, SideMenuProps } from '@repo/ui-antd'
+import { SideMenuProps } from '@repo/ui-antd'
 import { ReactNode, useMemo } from 'react'
-import { FaLightbulb } from 'react-icons/fa'
 import Icon from '@mdi/react'
 import {
   mdiAccountCircle,
@@ -11,17 +9,16 @@ import {
   mdiCog,
   mdiConsole,
   mdiLightbulb,
-  mdiLightbulbGroup,
   mdiLogout,
   mdiMedicalBag,
   mdiScriptTextPlay,
   mdiViewDashboard
 } from '@mdi/js'
-// import { Logo } from '../../logo/Logo'
 import { useRouter } from 'next/router'
-import { Logo } from '../../logo/Logo'
+import { BaseLayout } from '../base/base-layout'
 
 export interface PrivateLayoutProps {
+  header?: ReactNode
   children?: ReactNode
 }
 
@@ -122,31 +119,16 @@ export function PrivateLayout(props: PrivateLayoutProps) {
     ]
     return items
   }, [router])
+  console.log('PICCC', props.header)
 
   return (
-    <div className={$.layout}>
-      <span className={$.side}>
-        <SideMenu
-          header={collapsed => {
-            return (
-              <div className={$.header}>
-                <div className={$.logo}>
-                  <Logo mode={collapsed ? 'compact' : 'full'} />
-                </div>
-              </div>
-            )
-          }}
-          items={menuItems}
-          footerItems={footerItems}
-          footer={<div className={$.footer}>FOOT</div>}
-        />
-      </span>
-      <span className={$.content}>{props.children}</span>
-    </div>
+    <BaseLayout items={menuItems} footerItems={footerItems}>
+      {props.children}
+    </BaseLayout>
   )
 }
 
-export function wrapPrivateLayout(page: ReactNode) {
+export function wrapPrivateLayout(page: ReactNode, other: { header: ReactNode }) {
   return <PrivateLayout>{page}</PrivateLayout>
 }
 

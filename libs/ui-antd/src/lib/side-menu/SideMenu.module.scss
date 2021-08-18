@@ -20,10 +20,17 @@
     $inner-offset: calc(#{$wrap-size} * 0.25 * 0.5);
     position: absolute;
     right: calc(#{$wrap-size} * -0.5);
-    top: calc(#{$wrap-size} * 0.2);
+    top: 1.2rem;
     height: $wrap-size;
     width: $wrap-size;
-    transition: right $time-02 ease-out !important;
+    transition: right $time-02 ease-out, top 0.3s !important;
+
+    &.gap-top-S {
+      top: 0.75rem;
+    }
+    &.gap-top-M {
+      top: 2.25rem;
+    }
 
     &::after {
       content: '';
@@ -47,7 +54,7 @@
       width: $size;
       padding: 0;
       font-size: 1.2rem;
-      z-index: 100;
+      z-index: 1000;
       border-radius: 50%;
       border-width: 0px;
       border-color: $color-accent-base;
@@ -56,12 +63,14 @@
       background-color: $color-background-base;
       color: $color-background-contrast;
       transition: background-color $time-bg-color, color $time-bg-color, right $time-02 !important;
-      z-index: 2;
       &.offsetLeft {
         right: -1.8rem;
       }
+
       &:hover {
+        @include popoverShadow();
       }
+
       svg {
         height: 100%;
         width: 100%;

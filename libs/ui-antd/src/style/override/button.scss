@@ -18,7 +18,29 @@ $btn: ant-btn;
 
   transition: all $time-05 !important;
 
+  line-height: 100%;
+  padding: 0 1rem;
+
+  &.ant-btn-with-icon {
+    padding-left: 0.3rem;
+    & > svg {
+      height: 100%;
+      line-height: 100%;
+      padding: 0.35rem 0 0.3rem;
+      margin-right: 0.4rem;
+    }
+  }
+
   @mixin btn($color) {
+    &.ant-btn-with-icon {
+      display: inline-flex;
+      align-items: center;
+      & > :not(svg) {
+        color: map.get($color, 'contrast');
+        // height: 100%;
+        // line-height: 100%;
+      }
+    }
     &:not([disabled]) {
       &.#{$btn}-#{map.get($color, 'type')} {
         color: map.get($color, 'contrast');

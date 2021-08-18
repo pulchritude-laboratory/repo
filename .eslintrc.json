@@ -6,6 +6,7 @@
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
       "rules": {
+        "jsx-a11y/anchor-is-valid": "off",
         "@nrwl/nx/enforce-module-boundaries": [
           "error",
           {

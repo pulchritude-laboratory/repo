@@ -1,0 +1,30 @@
+@import '../../style/_generated';
+
+.header {
+  position: relative;
+  z-index: 999;
+  background-color: $color-background-base;
+  width: 100%;
+  height: 100%;
+
+  &::before {
+    content: ' ';
+    height: 100%;
+    width: 100%;
+    background-color: transparent;
+    display: block;
+    position: absolute;
+    bottom: 0px;
+    z-index: -1;
+    opacity: 0;
+
+    box-shadow: rgba(0, 0, 0, 0.123) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
+      rgba(0, 0, 0, 0.2) 0px -0.5px 0px inset;
+    transition: all $time-02;
+  }
+  &.shadow {
+    &::before {
+      opacity: 1;
+    }
+  }
+}

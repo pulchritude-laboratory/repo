@@ -15,6 +15,9 @@ import { NP } from '../utils/types'
 
 function CustomApp({ Component, pageProps }: AppProps) {
   const layout = (Component as NP).getLayout || (page => page)
+  const header = (Component as NP).getHeader
+
+  console.log({ Component })
 
   useEffect(() => {
     updateThemeCssVariables(
@@ -31,7 +34,7 @@ function CustomApp({ Component, pageProps }: AppProps) {
 
   return (
     <div className="app">
-      <Background>{layout(<Component {...pageProps} />)}</Background>
+      <Background>{layout(<Component {...pageProps} />, { header: 'header()' })}</Background>
     </div>
   )
 }

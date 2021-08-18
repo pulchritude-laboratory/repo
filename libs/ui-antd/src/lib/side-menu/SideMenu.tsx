@@ -5,7 +5,7 @@ import { useRouter } from 'next/router'
 
 import $ from './SideMenu.module.scss'
 
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { ReactNode } from 'react'
 import { Icon } from '@mdi/react'
 import { mdiBackburger, mdiMenu } from '@mdi/js'
@@ -29,25 +29,80 @@ export interface SideMenuItem {
 
 const keyMaker = (item?: SideMenuItem) => item?.to ?? item?.key
 
-/* eslint-disable-next-line */
 export interface SideMenuProps {
   items?: SideMenuItem[]
+  onCollapseChange?: (collapse: boolean) => void
   footerItems?: SideMenuItem[]
-  header?: (collapsed: boolean) => ReactNode
-  footer?: ReactNode
+  disabledSkinnyMenu?: boolean
+  collapsedOnInit?: boolean
+  toggleStyle?: 'gap-top-S' | 'gap-top-M'
+  disabled?: boolean
+  collapseAfterSelection?: boolean
+  menuHeader?: (collapsed: boolean) => ReactNode
 }
 
 export function SideMenu(props: SideMenuProps) {
-  const { header, items, footerItems, footer } = props
-  const [collapsed, setCollapsed] = useState(false)
+  const {
+    menuHeader,
+    items,
+    footerItems,
+    disabled,
+    disabledSkinnyMenu,
+    collapseAfterSelection,
+    collapsedOnInit,
+    onCollapseChange,
+    toggleStyle
+  } = props
+
   const router = useRouter()
-  console.log({ router })
-
-  const [selectedKey, setSelectedKey] = useState(router.pathname ?? keyMaker(items?.[0]))
-
   const breakpoints = useBreakpoint()
 
+  const [collapsed, setCollapsed] = useState(!!collapsedOnInit)
+  const [selectedKey, setSelectedKey] = useState(router.pathname ?? keyMaker(items?.[0]))
+
   const skinnyViewport = breakpoints.xs
+  const blockedSkinnyMenu = disabledSkinnyMenu || skinnyViewport
+
+  useEffect(() => {
+    if (disabled) setCollapsed(true)
+  }, [disabled])
+
+  useEffect(() => {
+    onCollapseChange?.(collapsed)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [collapsed])
+
+  const actionKeys = useMemo(() => {
+    return [...(items ?? []), ...(footerItems ?? [])]?.reduce<string[]>((acc, mi) => {
+      if (mi.type === 'action') {
+        const key = keyMaker(mi)
+        key && acc.push(key)
+      }
+      if (mi.subItems) {
+        mi.subItems.forEach(si => {
+          if (si.type === 'action') {
+            const key = keyMaker(si)
+            key && acc.push(key)
+          }
+        })
+      }
+      return acc
+    }, [])
+  }, [items, footerItems])
+
+  useEffect(() => {
+    let timer: NodeJS.Timeout | undefined = undefined
+
+    if (collapseAfterSelection && selectedKey) {
+      timer = setTimeout(() => {
+        setCollapsed(true)
+      }, 100)
+    }
+    console.log('HIHIIH', selectedKey, timer)
+    return () => {
+      timer && clearTimeout(timer)
+    }
+  }, [selectedKey, collapseAfterSelection])
 
   const renderMenu = useCallback(
     (menuItems?: SideMenuItem[]) => {
@@ -57,21 +112,8 @@ export function SideMenu(props: SideMenuProps) {
           mode="inline"
           theme="dark"
           onSelect={e => {
-            const actionKeys = menuItems?.reduce<string[]>((acc, mi) => {
-              if (mi.type === 'action') {
-                const key = keyMaker(mi)
-                key && acc.push(key)
-              }
-              if (mi.subItems) {
-                mi.subItems.forEach(si => {
-                  if (si.type === 'action') {
-                    const key = keyMaker(si)
-                    key && acc.push(key)
-                  }
-                })
-              }
-              return acc
-            }, [])
+            console.log('hoho SELECT', menuItems?.length, e.key)
+
             if (!actionKeys?.includes(e.key)) {
               setSelectedKey(e.key)
             }
@@ -82,7 +124,7 @@ export function SideMenu(props: SideMenuProps) {
             const content = (it?: SideMenuItem) => {
               return it?.to ? (
                 <Link href={it?.to ?? currentRoute}>
-                  <a>{it.label} LLL</a>
+                  <a>{it.label}</a>
                 </Link>
               ) : (
                 it?.label ?? '???'
@@ -100,9 +142,6 @@ export function SideMenu(props: SideMenuProps) {
                   {item.subItems.map(subItem => (
                     <Menu.Item key={subItem.to ?? subItem.key} icon={subItem.icon}>
                       {content(subItem)}
-                      {/* <Link href={subItem?.to ?? currentRoute}>
-                        <div>{subItem.label}</div>
-                      </Link> */}
                     </Menu.Item>
                   ))}
                 </SubMenu>
@@ -125,33 +164,29 @@ export function SideMenu(props: SideMenuProps) {
         </Menu>
       )
     },
-    [collapsed, selectedKey]
+    [collapsed, router, selectedKey, actionKeys]
   )
 
   return (
     <Layout.Sider
       breakpoint={'xs'}
-      onBreakpoint={v => {
-        console.log('BBR', v)
-      }}
-      collapsedWidth={skinnyViewport ? 0 : 70}
+      collapsedWidth={blockedSkinnyMenu ? 0 : 70}
       trigger={null}
       collapsed={collapsed}
       className={$.wrapper}
     >
-      <div className={cn($.toggleWrapper, { [$.offsetLeft]: skinnyViewport && collapsed })}>
-        <Button
-          className={cn($.toggle)}
-          onClick={() => {
-            console.log('TOO')
-
-            setCollapsed(c => !c)
-          }}
-        >
-          {<Icon path={collapsed ? mdiMenu : mdiBackburger} />}
-        </Button>
+      <div
+        className={cn($.toggleWrapper, $[toggleStyle ?? ''], {
+          [$.offsetLeft]: blockedSkinnyMenu && collapsed
+        })}
+      >
+        {!disabled && (
+          <Button className={cn($.toggle)} onClick={() => setCollapsed(c => !c)}>
+            {<Icon path={collapsed ? mdiMenu : mdiBackburger} />}
+          </Button>
+        )}
       </div>
-      <div className={$.header}>{header?.(collapsed)}</div>
+      <div className={$.header}>{menuHeader?.(collapsed)}</div>
       <div className={$.content}>{renderMenu(items)}</div>
       <div className={$.footer}>{renderMenu(footerItems)}</div>
     </Layout.Sider>

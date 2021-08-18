@@ -71,6 +71,8 @@ const Page: NP = () => {
   )
 }
 
+Page.getHeader = () => <h2 className="sss">Settings</h2>
+
 Page.getLayout = wrapPrivateLayout
 
 export default Page

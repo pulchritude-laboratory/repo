@@ -1,6 +1,5 @@
 import { Button } from '@repo/ui-antd'
 import { NP } from '../../utils/types'
-import Link from 'next/link'
 import { wrapAuthLayout } from '../../components/layout/auth/auth-layout'
 import { useRouter } from 'next/router'
 

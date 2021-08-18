@@ -1,3 +1,5 @@
+export * from './lib/page/Page'
+export * from './lib/header/Header'
 export * from './lib/side-menu/SideMenu'
 export * from './lib/button/Button'
 export * from './lib/background/Background'

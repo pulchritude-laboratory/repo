@@ -20,6 +20,8 @@ import {
 // import { Logo } from '../../logo/Logo'
 import { useRouter } from 'next/router'
 import { Logo } from '../../logo/Logo'
+import { BaseLayout } from '../base/base-layout'
+import { PublicLayout } from '../public/public-layout'
 
 export interface AuthLayoutProps {
   children?: ReactNode
@@ -31,9 +33,27 @@ export function AuthLayout(props: AuthLayoutProps) {
   const router = useRouter()
 
   return (
-    <div className={$.layout}>
-      <span className={$.content}>{props.children}</span>
-    </div>
+    <PublicLayout minimalist>
+      <span className={$.content}>
+        {props.children}
+        {props.children}
+        {props.children}
+        {props.children}
+        {props.children}
+        {props.children}
+        {props.children}
+        {props.children}
+        {props.children}
+        {props.children}
+        {props.children}
+        {props.children}
+        {props.children}
+        {props.children}
+        {props.children}
+        {props.children}
+        {props.children}
+      </span>
+    </PublicLayout>
   )
 }
 
