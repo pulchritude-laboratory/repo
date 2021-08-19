@@ -122,7 +122,7 @@ export function PrivateLayout(props: PrivateLayoutProps) {
   console.log('PICCC', props.header)
 
   return (
-    <BaseLayout items={menuItems} footerItems={footerItems}>
+    <BaseLayout toggleStyle="gap-top-S" items={menuItems} footerItems={footerItems}>
       {props.children}
     </BaseLayout>
   )

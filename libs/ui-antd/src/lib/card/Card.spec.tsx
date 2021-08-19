@@ -1,10 +1,10 @@
 import { render } from '@testing-library/react'
 
-import { PageFrame } from './Page'
+import Card from './Card'
 
-describe('Page', () => {
+describe('Card', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<PageFrame />)
+    const { baseElement } = render(<Card />)
     expect(baseElement).toBeTruthy()
   })
 })

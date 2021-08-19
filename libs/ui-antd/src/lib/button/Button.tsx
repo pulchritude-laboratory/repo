@@ -23,7 +23,9 @@ export function Button(props: ButtonProps) {
       <Btn
         {...(props as any)}
         danger={props.type === 'danger'}
-        className={cn(`ant-btn-${props.type}`, { 'ant-btn-with-icon': !!props.icon })}
+        className={cn(`ant-btn-${props.type}`, {
+          'ant-btn-with-icon': !!props.icon
+        })}
       >
         {props.title ?? props.children ?? 'Button'}
       </Btn>

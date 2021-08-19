@@ -1,108 +1,3 @@
-.layout {
-  // padding: 5rem;
-  // --
-  $background: rgb(177, 164, 164);
-  $background: white;
-  // grid-template-rows: 4rem calc(100vh - 4rem);
-  // width: 100vw;
-  // height: 100vh;
-  // overflow: hidden;
-
-  .header {
-    background-color: $background;
-    // position: sticky;
-    top: 0;
-    // background-color: orange;
-    // height: 4rem;
-    z-index: 1;
-    // width: 100vw;
-    padding: 1rem 5rem;
-    position: sticky;
-    display: grid;
-    grid-template-columns: 6rem auto auto;
-    & > * {
-      align-self: center;
-      display: inline-flex;
-      align-items: center;
-      min-height: 3rem;
-    }
-    .logo {
-      // width: 5rem;
-
-      svg {
-        margin-top: 0 !important;
-      }
-    }
-    .info {
-      align-self: center;
-      & > * {
-        margin: 0 0.5rem;
-      }
-
-      // display: inline-flex;
-      // align-items: center;
-      // justify-content: space-between;
-    }
-
-    .auth {
-      // display: inline-flex;
-      align-self: center;
-      justify-content: flex-end;
-
-      & > * {
-        margin: 0 0.5rem;
-      }
-    }
-  }
-  .content {
-    // background: aliceblue;
-    // overflow-y: auto;
-
-    // margin: 4rem;
-    // background: var(--color-background-lvl-0);
-    // overflow-y: hidden;
-    // overflow: auto;
-    // padding: 3rem;
-    // width: 100%;
-  }
-  &.mobile {
-    .header {
-      // grid-template-columns: 2rem auto max-content;
-    }
-
-    .header {
-      // background-color: white;
-      // width: 100vw;
-      // padding: 0.5rem;
-      // padding-left: 1rem;
-    }
-  }
-}
-
-.main {
-  height: 100vh;
-  display: grid;
-  grid-template-rows: min-content auto;
-
-  .headerWrapper {
-    height: 7rem;
-    transition: height 0.3s;
-    &.shrink {
-      height: 4rem;
-    }
-  }
-
-  .content {
-    overflow: auto;
-  }
-  .content {
-    padding: 4rem;
-  }
-}
-// .content {
-//   margin: 4rem;
-// }
-
 .header {
   top: 0;
   height: 100%;
@@ -110,10 +5,8 @@
   padding: 0rem 5rem 0rem 3rem;
   position: sticky;
   display: grid;
-  // height: 5rem;
   grid-template-columns: 6rem auto auto;
 
-  // box-shadow: 2px 2px 4px 6px black;
   & > * {
     align-self: center;
     display: inline-flex;
@@ -145,7 +38,6 @@
   &.mobile {
     grid-template-columns: 6rem auto;
     padding: 0rem 1rem 0rem 4rem;
-    // height: 4rem;
   }
   &.hiddenContent {
     & > * {

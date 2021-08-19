@@ -1,0 +1,35 @@
+@import '../../style/_generated';
+
+.page {
+  height: 100vh;
+  overflow-y: auto;
+
+  .headerWrapper {
+    position: fixed;
+    top: 0;
+    height: 7rem;
+    width: 100%;
+    z-index: 100;
+    background-color: $color-background-base;
+    transition: height 0.3s;
+    &.shrink {
+      height: 4rem;
+    }
+  }
+
+  .content {
+    overflow: auto;
+    margin-top: 7rem;
+    padding: 2rem 4rem 4rem;
+  }
+}
+
+.header {
+  padding: 0 4rem;
+  position: absolute;
+  bottom: 0;
+
+  .title {
+    padding-bottom: 0.3rem;
+  }
+}

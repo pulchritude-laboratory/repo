@@ -1,3 +1,4 @@
+export * from './lib/card/Card'
 export * from './lib/page/Page'
 export * from './lib/header/Header'
 export * from './lib/side-menu/SideMenu'

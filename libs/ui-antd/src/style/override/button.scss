@@ -37,8 +37,6 @@ $btn: ant-btn;
       align-items: center;
       & > :not(svg) {
         color: map.get($color, 'contrast');
-        // height: 100%;
-        // line-height: 100%;
       }
     }
     &:not([disabled]) {

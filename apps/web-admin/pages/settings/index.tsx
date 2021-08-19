@@ -1,7 +1,7 @@
 import { NP } from '../../utils/types'
 import { wrapPrivateLayout } from '../../components/layout/private/private-layout'
 import { useState } from 'react'
-import { Button, ThemeSwitcher } from '@repo/ui-antd'
+import { Button, ThemeSwitcher, PageFrame } from '@repo/ui-antd'
 
 const Page: NP = () => {
   /*
@@ -12,7 +12,7 @@ const Page: NP = () => {
 
   const [counter, setCounter] = useState(0)
   return (
-    <div>
+    <PageFrame header={{ title: 'Settings' }}>
       <h2 className="sss">Resources &amp; Tools</h2>
       <div style={{ height: '5rem' }}>
         <span style={{ padding: '1rem' }}>
@@ -67,11 +67,9 @@ const Page: NP = () => {
       </div>
 
       <ThemeSwitcher />
-    </div>
+    </PageFrame>
   )
 }
-
-Page.getHeader = () => <h2 className="sss">Settings</h2>
 
 Page.getLayout = wrapPrivateLayout
 

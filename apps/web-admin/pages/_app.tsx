@@ -15,7 +15,6 @@ import { NP } from '../utils/types'
 
 function CustomApp({ Component, pageProps }: AppProps) {
   const layout = (Component as NP).getLayout || (page => page)
-  const header = (Component as NP).getHeader
 
   console.log({ Component })
 
