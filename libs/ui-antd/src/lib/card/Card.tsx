@@ -1,14 +1,14 @@
+import { Card as AntCard, CardProps as AntCardProps } from 'antd'
+import { ReactNode } from 'react'
 import './Card.module.scss'
 
 /* eslint-disable-next-line */
-export interface CardProps {}
+export interface CardProps extends AntCardProps {
+  children?: ReactNode
+}
 
 export function Card(props: CardProps) {
-  return (
-    <div>
-      <h1>Welcome to Card!</h1>
-    </div>
-  )
+  return <AntCard>{props.children}</AntCard>
 }
 
 export default Card

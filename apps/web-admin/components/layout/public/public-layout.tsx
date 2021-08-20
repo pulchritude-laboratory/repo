@@ -107,7 +107,7 @@ export function PublicLayout(props: PublicLayoutProps) {
               {!breakpoints.xs && (
                 <span className={$.info}>
                   {menuItems.map(item => (
-                    <Button underline type={router.pathname === item.to ? 'link' : 'ghost'}>
+                    <Button type={router.pathname === item.to ? 'link' : 'ghost'}>
                       <Link href={item.to}>
                         <a>{item.label}</a>
                       </Link>

@@ -1,4 +1,7 @@
+@use "sass:map";
+
 @import '../../style/_generated';
+@import '../../style/extends';
 @import '../../style/variables';
 @import '../../style/shadow';
 @import '../../style/override/popup';
@@ -114,5 +117,262 @@
     box-shadow: 0px -1px 0px 0px $edge-color;
     padding-top: 1rem;
     padding-bottom: 2rem;
+  }
+}
+
+// Custom menu
+
+$side-gap: 0.5rem;
+$item-gap: 0.3rem;
+$delay-color: 3s;
+$delay-icon: 0.3s;
+$item-height: 45px;
+
+%base-item {
+  @extend %disable-text-select;
+
+  height: $item-height;
+  line-height: $item-height;
+
+  width: calc(100% - #{$side-gap}) !important;
+  margin-left: $side-gap;
+  margin-bottom: 0.4rem;
+
+  border-radius: $border-radius-button-large 0 0 $border-radius-button-large;
+  // padding-left: 0.75rem !important;
+
+  .itemContent {
+    overflow: hidden;
+    height: 100%;
+    width: 200px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.2rem 0.7rem;
+    color: $color-accent-contrast;
+    .info {
+      height: 100%;
+      display: inline-flex;
+      align-items: center;
+      .icon {
+        --menu-icon-size: 1.5rem;
+        height: 2rem;
+        width: var(--menu-icon-size);
+        margin-right: 0.7rem;
+        transition: width $time-02, height $time-02;
+        svg {
+          // height: 2rem;
+          // width: 2rem;
+        }
+      }
+      .label {
+        // color: red;
+        opacity: 1;
+        transition: opacity $time-02;
+        font-size: medium;
+      }
+    }
+    .subMenuTrigger {
+      height: 2rem;
+      width: 2rem;
+      svg {
+        height: 1.4rem;
+        width: 1.4rem;
+        transition: transform 0.3s ease;
+      }
+    }
+  }
+
+  // @include itemContentColor(colorBase('contrast'));
+  // @include itemContentSize(1.2rem);
+
+  &:hover {
+    background: $color-accent-contrast-01;
+  }
+  &:active {
+    background: $color-accent-contrast-02;
+  }
+
+  &::after,
+  &::before {
+    content: '';
+    position: absolute;
+    z-index: 100;
+    right: -40px;
+    height: 16px;
+    width: 9px;
+    opacity: 0;
+    background-color: transparent;
+    transition: all $time-02 ease-out;
+  }
+  &::before {
+    top: -16px;
+    border-radius: 100% 0 100% 0/0 0 100% 100%;
+    box-shadow: 1px 4px 0 0 $color-background-base;
+  }
+  &::after {
+    top: calc(#{$item-height} - 0.1px);
+    border-radius: 0 100% 0 0/0 100% 0 100%;
+    box-shadow: 1px -4px 0 0 $color-background-base;
+  }
+}
+
+%floating-item {
+  $item-height: 2.5rem;
+  height: $item-height;
+  line-height: $item-height;
+  padding: 0 0.5rem;
+  margin-top: 0.3rem;
+  .label {
+    font-size: medium;
+  }
+  &:first-child {
+    margin-top: 0;
+  }
+  border-radius: $border-radius-button;
+  width: unset;
+  &:hover {
+    background: $color-accent-contrast-01;
+  }
+  &:active {
+    background: $color-accent-contrast-02;
+  }
+}
+
+%stick-around {
+  position: sticky;
+  top: 0;
+  bottom: 0;
+  z-index: 10;
+}
+
+%selected-item {
+  @extend %stick-around;
+
+  background-color: $color-background-base;
+  overflow: revert !important;
+
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
+    rgba(0, 0, 0, 0.2) 0px -0.5px 0px inset;
+
+  // @include itemContentColor(colorSelected('contrast'));
+  * {
+    color: $color-background-contrast;
+    fill: $color-background-contrast;
+    font-size: medium;
+  }
+
+  &:hover {
+    background-color: $color-background-base !important;
+  }
+
+  &::before {
+    right: -2px;
+    opacity: 1;
+  }
+  &::after {
+    right: -2px;
+    opacity: 1;
+  }
+}
+
+%selected-floating-item {
+  background-color: $color-background-base;
+
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
+    rgba(0, 0, 0, 0.2) 0px -0.5px 0px inset;
+  * {
+    color: $color-background-contrast !important;
+    fill: $color-background-contrast;
+  }
+
+  &:hover {
+    background-color: $color-background-base !important;
+  }
+}
+
+%collapsed-item {
+  .itemContent {
+    .icon {
+      --menu-icon-size: 1.8rem;
+    }
+    .label {
+      opacity: 0;
+    }
+  }
+}
+
+.menuItem {
+  @extend %base-item;
+
+  &.selected {
+    @extend %selected-item;
+  }
+  &.collapsed {
+    @extend %collapsed-item;
+  }
+}
+
+// .subMenu {
+.subMenuHeader {
+  @extend %base-item;
+
+  &.selected {
+    @extend %selected-item;
+  }
+  &.collapsed {
+    @extend %collapsed-item;
+  }
+}
+
+.subMenuItem {
+  width: calc(100% - (#{$side-gap} * 5)) !important;
+}
+
+.floatingMenuItem {
+  @extend %floating-item;
+
+  &.selected {
+    @extend %selected-floating-item;
+  }
+}
+
+.popover {
+  $bg: $color-accent-base;
+
+  :global {
+    .ant-popover-arrow {
+      top: 1.2rem;
+      .ant-popover-arrow-content {
+        background-color: $bg;
+      }
+    }
+    .ant-popover-inner {
+      @include popoverShadow();
+      border-radius: $border-radius-button;
+      background-color: $bg;
+      .ant-popover-inner-content {
+        padding: 0.5rem;
+      }
+      * {
+        color: $color-accent-contrast;
+      }
+    }
+  }
+}
+
+.tooltip {
+  $bg: $color-accent-base;
+
+  :global(.ant-tooltip-arrow > .ant-tooltip-arrow-content) {
+    background-color: $bg;
+  }
+  :global(.ant-tooltip-inner) {
+    @include popoverShadow();
+    border-radius: $border-radius-button;
+    background-color: $bg;
+    * {
+      color: $color-accent-contrast !important;
+    }
   }
 }

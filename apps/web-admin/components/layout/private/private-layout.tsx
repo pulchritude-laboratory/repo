@@ -64,7 +64,7 @@ export function PrivateLayout(props: PrivateLayoutProps) {
         icon: <Icon path={mdiScriptTextPlay} />
       },
       {
-        to: '/command',
+        key: '/command',
         label: t('menu.command'),
         icon: <Icon path={mdiConsole} />,
         subItems: [

@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { Button, Layout, Menu, MenuItemProps } from 'antd'
+import { Button, Dropdown, Layout, Menu, MenuItemProps, Popover, Tooltip } from 'antd'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
@@ -8,7 +8,7 @@ import $ from './SideMenu.module.scss'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { ReactNode } from 'react'
 import { Icon } from '@mdi/react'
-import { mdiBackburger, mdiMenu } from '@mdi/js'
+import { mdiBackburger, mdiChevronDown, mdiMenu } from '@mdi/js'
 
 import { AiOutlineMenuFold, AiOutlineMenu } from 'react-icons/ai'
 import { MdAlarm } from 'react-icons/md'
@@ -21,7 +21,7 @@ export interface SideMenuItem {
   type?: 'page' | 'action'
   key?: string
   to?: `/${string}`
-  onClick?: MenuItemProps['onClick']
+  onClick?: () => void
   label?: ReactNode
   icon?: ReactNode
   subItems?: Omit<SideMenuItem, 'subItems'>[]
@@ -60,6 +60,8 @@ export function SideMenu(props: SideMenuProps) {
   const [collapsed, setCollapsed] = useState(!!collapsedOnInit)
   const [selectedKey, setSelectedKey] = useState(router.pathname ?? keyMaker(items?.[0]))
 
+  const [openSubMenu, setOpenSubMenu] = useState<string>()
+
   const skinnyViewport = breakpoints.xs
   const blockedSkinnyMenu = disabledSkinnyMenu || skinnyViewport
 
@@ -68,8 +70,7 @@ export function SideMenu(props: SideMenuProps) {
   }, [disabled])
 
   useEffect(() => {
-    onCollapseChange?.(collapsed)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    collapsed && setOpenSubMenu(undefined)
   }, [collapsed])
 
   const actionKeys = useMemo(() => {
@@ -104,7 +105,7 @@ export function SideMenu(props: SideMenuProps) {
     }
   }, [selectedKey, collapseAfterSelection])
 
-  const renderMenu = useCallback(
+  const renderMenu2 = useCallback(
     (menuItems?: SideMenuItem[]) => {
       const currentRoute = '/'
       return (
@@ -153,7 +154,7 @@ export function SideMenu(props: SideMenuProps) {
                 key={item.to ?? item.key}
                 icon={item.icon}
                 onClick={e => {
-                  item.onClick?.(e)
+                  item.onClick?.()
                   collapsed && item?.to && router.push(item.to)
                 }}
               >
@@ -165,6 +166,150 @@ export function SideMenu(props: SideMenuProps) {
       )
     },
     [collapsed, router, selectedKey, actionKeys]
+  )
+
+  const renderMenu = useCallback(
+    (menuItems?: SideMenuItem[]) => {
+      const currentRoute = '/'
+      return menuItems?.map(item => {
+        const tooltip = (content: ReactNode, it?: SideMenuItem) =>
+          collapsed ? (
+            <Tooltip
+              overlayClassName={$.tooltip}
+              title={it?.label}
+              placement="right"
+              mouseEnterDelay={0.3}
+            >
+              {content}
+            </Tooltip>
+          ) : (
+            content
+          )
+
+        const itemContent = (it?: SideMenuItem) => (
+          <div key={item.to ?? item.key} className={$.itemContent} onClick={it?.onClick}>
+            <span className={$.info}>
+              {it?.icon && <span className={$.icon}>{it.icon}</span>}
+              {it?.label && <span className={$.label}>{it.label}</span>}
+            </span>
+            {!collapsed && it?.subItems && (
+              <span className={$.subMenuTrigger}>
+                <Icon path={mdiChevronDown} rotate={openSubMenu === it.key ? -180 : 0} />
+              </span>
+            )}
+          </div>
+        )
+
+        const link = (it?: SideMenuItem) => (
+          <Link key={item.to ?? item.key} href={it?.to ?? currentRoute}>
+            <a key={item.to ?? item.key}>{itemContent(it)}</a>
+          </Link>
+        )
+
+        const content = (it?: SideMenuItem) => {
+          if (it?.to) {
+            return link(it)
+          }
+          return itemContent(it)
+        }
+
+        const menuItem = (it?: SideMenuItem, className?: string) => {
+          return (
+            <div
+              className={cn($.menuItem, className, {
+                [$.selected]: it?.to === selectedKey,
+                [$.collapsed]: collapsed
+              })}
+              key={it?.to ?? it?.key}
+              onClick={() => {
+                if (it?.to && !actionKeys?.includes(it.to)) {
+                  setSelectedKey(it.to)
+                }
+              }}
+            >
+              {content(it)}
+            </div>
+          )
+        }
+
+        const menuItemWithTooltip = (it?: SideMenuItem) => {
+          return tooltip(menuItem(it), it)
+        }
+
+        const subMenuItem = (it?: SideMenuItem) => {
+          return menuItem(it, $.subMenuItem)
+        }
+
+        const floatingMenuItem = (it?: SideMenuItem) => {
+          return (
+            <div
+              className={cn($.floatingMenuItem, {
+                [$.selected]: it?.to === selectedKey
+              })}
+              key={it?.to ?? it?.key}
+              onClick={() => {
+                if (it?.to && !actionKeys?.includes(it.to)) {
+                  setSelectedKey(it.to)
+                }
+              }}
+            >
+              {content(it)}
+            </div>
+          )
+        }
+
+        const popoverSubMenu = (content: ReactNode, it?: SideMenuItem) => {
+          return collapsed ? (
+            <Popover
+              placement="rightTop"
+              content={<div>{it?.subItems?.map(floatingMenuItem)}</div>}
+              mouseEnterDelay={0}
+              overlayClassName={$.popover}
+              onVisibleChange={e => {
+                console.log('POP', e, it)
+              }}
+            >
+              {content}
+            </Popover>
+          ) : (
+            content
+          )
+        }
+
+        const subMenuHeader = (it?: SideMenuItem) => {
+          const selected = it?.subItems?.some(s => s.to === selectedKey)
+          const open = openSubMenu && openSubMenu === it?.key
+          console.log('HELLO', { selected, open, openSubMenu })
+
+          return popoverSubMenu(
+            <div
+              className={cn($.subMenuHeader, {
+                [$.selected]: selected && (collapsed || !open),
+                [$.collapsed]: collapsed
+              })}
+              key={it?.to ?? it?.key}
+              onClick={() => {
+                setOpenSubMenu(k => (k === it?.key ? undefined : it?.key))
+                console.log('JJJJJJ', it)
+              }}
+            >
+              {content(it)}
+            </div>,
+            it
+          )
+        }
+
+        const subMenu = (it?: SideMenuItem) => (
+          <>
+            {subMenuHeader(it)}
+            {!collapsed && openSubMenu && openSubMenu === it?.key && it?.subItems?.map(subMenuItem)}
+          </>
+        )
+
+        return item.subItems ? subMenu(item) : menuItemWithTooltip(item)
+      })
+    },
+    [collapsed, selectedKey, actionKeys, openSubMenu]
   )
 
   return (

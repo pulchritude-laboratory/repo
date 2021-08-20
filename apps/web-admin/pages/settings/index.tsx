@@ -13,7 +13,7 @@ const Page: NP = () => {
   const [counter, setCounter] = useState(0)
   return (
     <PageFrame header={{ title: 'Settings' }}>
-      <h2 className="sss">Resources &amp; Tools</h2>
+      <h2 className="sss">Resources &amp; Tools fasdfsdaf </h2>
       <div style={{ height: '5rem' }}>
         <span style={{ padding: '1rem' }}>
           <Button type="primary" title="primary" onClick={() => setCounter(v => v + 1)} />
