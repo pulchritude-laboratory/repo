@@ -73,6 +73,11 @@ export function SideMenu(props: SideMenuProps) {
     collapsed && setOpenSubMenu(undefined)
   }, [collapsed])
 
+  useEffect(() => {
+    onCollapseChange?.(collapsed)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [collapsed])
+
   const actionKeys = useMemo(() => {
     return [...(items ?? []), ...(footerItems ?? [])]?.reduce<string[]>((acc, mi) => {
       if (mi.type === 'action') {
@@ -175,6 +180,7 @@ export function SideMenu(props: SideMenuProps) {
         const tooltip = (content: ReactNode, it?: SideMenuItem) =>
           collapsed ? (
             <Tooltip
+              key={item.to ?? item.key}
               overlayClassName={$.tooltip}
               title={it?.label}
               placement="right"

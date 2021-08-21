@@ -3,8 +3,20 @@
 }
 
 .wrapper {
-  width: 100%;
-  padding: 5rem;
-  // margin: 4rem;
-  background: aliceblue;
+  width: 22rem;
+  padding-bottom: 5rem;
+  min-height: 12rem;
+  margin: auto;
+
+  // background: aliceblue;
+}
+
+.logo {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.submit {
+  margin-top: 3rem;
+  text-align: center;
 }

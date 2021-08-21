@@ -20,7 +20,7 @@ export function PageFrame(props: PageProps) {
   const { children, header, headerComponent, onHeaderShrink } = props
 
   const [isAtTop, setIsAtTop] = useState(true)
-  const [shrunk, setShrunk] = useState(true)
+  const [shrunk, setShrunk] = useState(false)
 
   const breakpoint = useBreakpoint()
 

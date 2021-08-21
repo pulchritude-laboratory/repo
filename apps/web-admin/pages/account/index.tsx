@@ -1,11 +1,13 @@
 import { NP } from '../../utils/types'
 import { wrapPrivateLayout } from '../../components/layout/private/private-layout'
+import { PageFrame } from '@repo/ui-antd'
+import { LoremIpsum } from '../../components/ipsum/lorem-ipsum'
 
 const Page: NP = () => {
   return (
-    <div>
-      <h2>Account</h2>
-    </div>
+    <PageFrame header={{ title: 'Account' }}>
+      <LoremIpsum />
+    </PageFrame>
   )
 }
 

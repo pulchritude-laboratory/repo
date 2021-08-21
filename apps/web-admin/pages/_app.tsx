@@ -16,8 +16,6 @@ import { NP } from '../utils/types'
 function CustomApp({ Component, pageProps }: AppProps) {
   const layout = (Component as NP).getLayout || (page => page)
 
-  console.log({ Component })
-
   useEffect(() => {
     updateThemeCssVariables(
       createTheme({
@@ -31,11 +29,7 @@ function CustomApp({ Component, pageProps }: AppProps) {
     )
   }, [])
 
-  return (
-    <div className="app">
-      <Background>{layout(<Component {...pageProps} />, { header: 'header()' })}</Background>
-    </div>
-  )
+  return <div className="app">{layout(<Component {...pageProps} />, { header: 'header()' })}</div>
 }
 
 export default CustomApp

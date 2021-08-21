@@ -1,0 +1,7 @@
+@import '../../style/_generated';
+@import '../../style/shadow';
+
+.card {
+  @include shadow();
+  border-radius: $border-radius-card;
+}

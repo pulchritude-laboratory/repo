@@ -2,67 +2,58 @@ import { NP } from '../../utils/types'
 import { wrapPrivateLayout } from '../../components/layout/private/private-layout'
 import { useState } from 'react'
 import { Button, ThemeSwitcher, PageFrame } from '@repo/ui-antd'
+import { LoremIpsum } from '../../components/ipsum/lorem-ipsum'
 
 const Page: NP = () => {
-  /*
-   * Replace the elements below with your own.
-   *
-   * Note: The corresponding styles are in the ./index.scss file.
-   */
-
-  const [counter, setCounter] = useState(0)
   return (
     <PageFrame header={{ title: 'Settings' }}>
+      <LoremIpsum />
+
       <h2 className="sss">Resources &amp; Tools fasdfsdaf </h2>
       <div style={{ height: '5rem' }}>
         <span style={{ padding: '1rem' }}>
-          <Button type="primary" title="primary" onClick={() => setCounter(v => v + 1)} />
+          <Button type="primary" title="primary" />
         </span>
         <span style={{ margin: '3rem' }}>
-          <Button type="secondary" title="secondary" onClick={() => setCounter(v => v + 1)} />
+          <Button type="secondary" title="secondary" />
         </span>
         <span style={{ margin: '3rem' }}>
-          <Button type="default" title="default" onClick={() => setCounter(v => v + 1)} />
+          <Button type="default" title="default" />
         </span>
         <span style={{ margin: '3rem' }}>
-          <Button type="ghost" title="ghost" onClick={() => setCounter(v => v + 1)} />
+          <Button type="ghost" title="ghost" />
         </span>
         <span style={{ margin: '3rem' }}>
-          <Button type="danger" title="danger" onClick={() => setCounter(v => v + 1)} />
+          <Button type="danger" title="danger" />
         </span>
         <span style={{ margin: '3rem' }}>
-          <Button type="warning" title="warning" onClick={() => setCounter(v => v + 1)} />
+          <Button type="warning" title="warning" />
         </span>
         <span style={{ margin: '3rem' }}>
-          <Button type="link" title="link" onClick={() => setCounter(v => v + 1)} />
+          <Button type="link" title="link" />
         </span>
       </div>
       <div style={{ height: '5rem' }}>
         <span style={{ padding: '1rem' }}>
-          <Button disabled type="primary" title="primary" onClick={() => setCounter(v => v + 1)} />
+          <Button disabled type="primary" title="primary" />
         </span>
         <span style={{ margin: '3rem' }}>
-          <Button
-            disabled
-            type="secondary"
-            title="secondary"
-            onClick={() => setCounter(v => v + 1)}
-          />
+          <Button disabled type="secondary" title="secondary" />
         </span>
         <span style={{ margin: '3rem' }}>
-          <Button disabled type="default" title="default" onClick={() => setCounter(v => v + 1)} />
+          <Button disabled type="default" title="default" />
         </span>
         <span style={{ margin: '3rem' }}>
-          <Button disabled type="ghost" title="ghost" onClick={() => setCounter(v => v + 1)} />
+          <Button disabled type="ghost" title="ghost" />
         </span>
         <span style={{ margin: '3rem' }}>
-          <Button disabled type="danger" title="danger" onClick={() => setCounter(v => v + 1)} />
+          <Button disabled type="danger" title="danger" />
         </span>
         <span style={{ margin: '3rem' }}>
-          <Button disabled type="warning" title="warning" onClick={() => setCounter(v => v + 1)} />
+          <Button disabled type="warning" title="warning" />
         </span>
         <span style={{ margin: '3rem' }}>
-          <Button disabled type="link" title="link" onClick={() => setCounter(v => v + 1)} />
+          <Button disabled type="link" title="link" />
         </span>
       </div>
 

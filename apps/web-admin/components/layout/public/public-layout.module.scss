@@ -39,6 +39,9 @@
     grid-template-columns: 6rem auto;
     padding: 0rem 1rem 0rem 4rem;
   }
+  &.mobileMinimalist {
+    padding: 0rem 1rem 0rem 1rem;
+  }
   &.hiddenContent {
     & > * {
       opacity: 0;

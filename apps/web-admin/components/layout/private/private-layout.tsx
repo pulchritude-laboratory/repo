@@ -1,4 +1,4 @@
-import { SideMenuProps } from '@repo/ui-antd'
+import { Background, SideMenuProps } from '@repo/ui-antd'
 import { ReactNode, useMemo } from 'react'
 import Icon from '@mdi/react'
 import {
@@ -122,9 +122,11 @@ export function PrivateLayout(props: PrivateLayoutProps) {
   console.log('PICCC', props.header)
 
   return (
-    <BaseLayout toggleStyle="gap-top-S" items={menuItems} footerItems={footerItems}>
-      {props.children}
-    </BaseLayout>
+    <Background>
+      <BaseLayout toggleStyle="gap-top-S" items={menuItems} footerItems={footerItems}>
+        {props.children}
+      </BaseLayout>
+    </Background>
   )
 }
 

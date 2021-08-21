@@ -1,6 +1,14 @@
 import $ from './public-layout.module.scss'
 import { ReactNode, useMemo, useState } from 'react'
-import { Button, ButtonProps, Header, PageFrame, SideMenuItem, SideMenuProps } from '@repo/ui-antd'
+import {
+  Background,
+  Button,
+  ButtonProps,
+  Header,
+  PageFrame,
+  SideMenuItem,
+  SideMenuProps
+} from '@repo/ui-antd'
 import Link from 'next/link'
 import useBreakpoint from 'antd/lib/grid/hooks/useBreakpoint'
 import Icon from '@mdi/react'
@@ -19,7 +27,7 @@ export function PublicLayout(props: PublicLayoutProps) {
   const { minimalist } = props
   const breakpoints = useBreakpoint()
 
-  const [collapsed, setCollapsed] = useState<boolean>()
+  const [collapsed, setCollapsed] = useState<boolean>(true)
   const [isAtTop, setIsAtTop] = useState(true)
   const [shrunkHeader, setShrunkHeader] = useState(true)
 
@@ -73,67 +81,69 @@ export function PublicLayout(props: PublicLayoutProps) {
   }, [])
 
   return (
-    <BaseLayout
-      items={menuItems}
-      footerItems={footerItems}
-      disabledSkinnyMenu
-      collapseAfterSelection
-      collapsedOnInit
-      toggleStyle={shrunkHeader ? 'gap-top-S' : 'gap-top-M'}
-      disabled={!skinnyViewport}
-      onCollapseChange={setCollapsed}
-    >
-      <PageFrame
-        onHeaderShrink={setShrunkHeader}
-        headerComponent={
-          minimalist ? (
-            <div className={cn($.header)}>
-              <Button type="ghost" icon={<Icon path={mdiArrowLeft} />}>
-                <Link href="/">
-                  <a>{'Home'}</a>
-                </Link>
-              </Button>
-            </div>
-          ) : (
-            <div
-              className={cn($.header, {
-                [$.mobile]: skinnyViewport,
-                [$.hiddenContent]: !collapsed || minimalist
-              })}
-            >
-              <span className={$.logo}>
-                <Logo mode={skinnyViewport ? 'full' : 'full'} />
-              </span>
-              {!breakpoints.xs && (
-                <span className={$.info}>
-                  {menuItems.map(item => (
-                    <Button type={router.pathname === item.to ? 'link' : 'ghost'}>
-                      <Link href={item.to}>
-                        <a>{item.label}</a>
-                      </Link>
-                    </Button>
-                  ))}
-                </span>
-              )}
-              <span className={$.auth}>
-                {footerItems
-                  .slice()
-                  .reverse()
-                  .map(item => (
-                    <Button type={item.button.type ?? 'ghost'}>
-                      <Link href={item.to}>
-                        <a>{item.label}</a>
-                      </Link>
-                    </Button>
-                  ))}
-              </span>
-            </div>
-          )
-        }
+    <Background web={minimalist}>
+      <BaseLayout
+        items={menuItems}
+        footerItems={footerItems}
+        disabledSkinnyMenu
+        collapseAfterSelection
+        collapsedOnInit
+        toggleStyle={shrunkHeader ? 'gap-top-S' : 'gap-top-M'}
+        disabled={!skinnyViewport || minimalist}
+        onCollapseChange={setCollapsed}
       >
-        <div>{props.children}</div>
-      </PageFrame>
-    </BaseLayout>
+        <PageFrame
+          onHeaderShrink={setShrunkHeader}
+          headerComponent={
+            minimalist ? (
+              <div className={cn($.header, { [$.mobileMinimalist]: skinnyViewport })}>
+                <Button type="ghost" icon={<Icon path={mdiArrowLeft} />}>
+                  <Link href="/">
+                    <a>{'Home'}</a>
+                  </Link>
+                </Button>
+              </div>
+            ) : (
+              <div
+                className={cn($.header, {
+                  [$.mobile]: skinnyViewport,
+                  [$.hiddenContent]: !collapsed || minimalist
+                })}
+              >
+                <span className={$.logo}>
+                  <Logo mode={skinnyViewport ? 'full' : 'full'} />
+                </span>
+                {!breakpoints.xs && (
+                  <span className={$.info}>
+                    {menuItems.map(item => (
+                      <Button key={item.to} type={router.pathname === item.to ? 'link' : 'ghost'}>
+                        <Link href={item.to}>
+                          <a>{item.label}</a>
+                        </Link>
+                      </Button>
+                    ))}
+                  </span>
+                )}
+                <span className={$.auth}>
+                  {footerItems
+                    .slice()
+                    .reverse()
+                    .map(item => (
+                      <Button key={item.to} type={item.button.type ?? 'ghost'}>
+                        <Link href={item.to}>
+                          <a>{item.label}</a>
+                        </Link>
+                      </Button>
+                    ))}
+                </span>
+              </div>
+            )
+          }
+        >
+          <div>{props.children}</div>
+        </PageFrame>
+      </BaseLayout>
+    </Background>
   )
 }
 

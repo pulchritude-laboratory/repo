@@ -34,25 +34,7 @@ export function AuthLayout(props: AuthLayoutProps) {
 
   return (
     <PublicLayout minimalist>
-      <span className={$.content}>
-        {props.children}
-        {props.children}
-        {props.children}
-        {props.children}
-        {props.children}
-        {props.children}
-        {props.children}
-        {props.children}
-        {props.children}
-        {props.children}
-        {props.children}
-        {props.children}
-        {props.children}
-        {props.children}
-        {props.children}
-        {props.children}
-        {props.children}
-      </span>
+      <span className={$.content}>{props.children}</span>
     </PublicLayout>
   )
 }

@@ -1,6 +1,11 @@
 import { FC } from 'react'
 import $ from './Background.module.scss'
+import cn from 'classnames'
 
-export const Background: FC = ({ children }) => {
-  return <div className={$.background}>{children}</div>
+interface BackgroundProps {
+  imgUrl?: string
+  web?: boolean
+}
+export const Background: FC<BackgroundProps> = ({ children, web }) => {
+  return <div className={cn($.background, { [$.web]: web })}>{children}</div>
 }
